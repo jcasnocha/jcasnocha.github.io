@@ -25,7 +25,6 @@
       flex-direction: column;
     }
 
-    /* === Horná časť (profil) === */
     header {
       background: var(--card-bg);
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -104,7 +103,6 @@
       background: #005f91;
     }
 
-    /* === Spodná časť (dynamický obsah) === */
     main {
       flex-grow: 1;
       overflow-y: auto;
@@ -139,6 +137,7 @@
       background: #fafafa;
       margin-bottom: 1em;
       transition: 0.3s;
+      cursor: pointer;
     }
 
     .project:hover {
@@ -154,12 +153,19 @@
       padding: 1em 0;
       background: var(--light-bg);
     }
+
+    ul {
+      padding-left: 1.2em;
+    }
+
+    ul li {
+      margin-bottom: 0.5em;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Horná časť -->
   <header>
     <div class="profile">
       <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar">
@@ -174,19 +180,17 @@
     </div>
 
     <nav>
-      <button class="active" onclick="showSection('projekty')"><i class="fa-solid fa-briefcase"></i> Projekty</button>
-      <button onclick="showSection('kalendaria')"><i class="fa-solid fa-calendar-days"></i> Kalendária</button>
-      <button onclick="showSection('kontakt')"><i class="fa-solid fa-envelope"></i> Kontakt</button>
+      <button class="active" onclick="showSection('projekty', event)"><i class="fa-solid fa-briefcase"></i> Projekty</button>
+      <button onclick="showSection('kontakt', event)"><i class="fa-solid fa-envelope"></i> Kontakt</button>
     </nav>
   </header>
 
-  <!-- Spodná dynamická časť -->
   <main>
     <section id="projekty" class="active">
       <h2>🛠️ Projekty</h2>
-      <div class="project">
+      <div class="project" onclick="showSection('kalendaria', event)">
         <h3>📅 Kalendária – offline kalendár</h3>
-        <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Funguje offline, bez reklám a bez zberu údajov.</p>
+        <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Klikni pre detail.</p>
       </div>
 
       <div class="project">
@@ -202,34 +206,17 @@
 
     <section id="kalendaria">
       <h2>📅 Kalendária – Informácie o aplikácii</h2>
-      <p>Aplikácia funguje offline, neobsahuje reklamy a nezbiera osobné údaje. 
-         Umožňuje pripomínať narodeniny, meniny, sviatky a zobrazovať zaujímavosti na každý deň.</p>
+      <p>Aplikácia funguje offline, neobsahuje reklamy a nezbiera osobné údaje. Umožňuje pripomínať narodeniny, meniny, sviatky a zobrazovať zaujímavosti na každý deň.</p>
       <ul>
         <li><b>Offline prevádzka:</b> všetky dáta ostávajú len v tvojom zariadení.</li>
         <li><b>Widgety:</b> sviatky, narodeniny, citáty – priamo na ploche.</li>
         <li><b>Nastavenia:</b> farby, priehľadnosť, notifikácie.</li>
+        <li><b>Citáty a zaujímavosti:</b> každý deň obsahuje historické fakty, medzinárodné dni a inšpiratívne myšlienky.</li>
+        <li><b>Ochrana údajov:</b> aplikácia nekomunikuje so servermi, nevyžaduje registráciu a neobsahuje reklamy.</li>
       </ul>
     </section>
 
     <section id="kontakt">
       <h2>📩 Kontakt</h2>
       <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
-      <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></p>
-      <p><i class="fa-brands fa-github"></i> <a href="https://github.com/jcasnocha" target="_blank">github.com/jcasnocha</a></p>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 Jozef Časnocha
-  </footer>
-
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-    }
-  </script>
-</body>
-</html>
+      <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></
