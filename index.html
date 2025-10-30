@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kalendária – Informácie o aplikácii</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Jcasnocha – Bio</title>
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -14,131 +14,111 @@
       padding: 2em;
       line-height: 1.6;
     }
-    header, section, footer {
+
+    header,
+    section {
       max-width: 800px;
       margin: 0 auto 3em auto;
-    }
-    header {
       text-align: center;
     }
+
     h1 {
-      font-size: 2.3em;
-      margin-bottom: 0.3em;
+      font-size: 2.5em;
+      margin-bottom: 0.2em;
     }
+
     h2 {
-      font-size: 1.5em;
+      font-size: 1.8em;
       margin-top: 2em;
-      display: flex;
-      align-items: center;
-      gap: 0.5em;
-      color: #444;
     }
-    h2 i {
-      color: #777;
+
+    p {
+      font-size: 1.1em;
     }
-    ul {
-      list-style-type: none;
-      padding-left: 1.5em;
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5em;
+      margin-top: 1em;
     }
-    ul li {
-      position: relative;
-      margin: 0.5em 0;
-      padding-left: 1em;
+
+    .project {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1em;
+      text-align: left;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     }
-    ul li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #777;
+
+    .project h3 {
+      margin-top: 0;
+      font-size: 1.2em;
     }
-    a {
+
+    .project a {
       color: #007acc;
       text-decoration: none;
     }
-    a:hover {
+
+    .project a:hover {
       text-decoration: underline;
-    }
-    .contact p {
-      margin: 0.3em 0;
-      font-style: italic;
-    }
-    .contact i {
-      color: #555;
-      margin-right: 8px;
-      width: 18px;
-      text-align: center;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: #777;
-      margin-top: 4em;
     }
   </style>
 </head>
+
 <body>
+  <header>
+    <h1>Ahoj, som Jcasnocha 👋</h1>
+    <p>
+      Venujem sa DIY elektronike, opravám batériových zariadení a Python
+      skriptom na analýzu dát. Milujem praktické učenie a čistý dizajn.
+    </p>
+    <p>
+      Nájdeš ma na
+      <a href="https://github.com/jcasnocha" target="_blank">GitHube</a>
+    </p>
+  </header>
 
-<header>
-  <h1><i class="fa-solid fa-circle-info"></i> Informácie o aplikácii Kalendária</h1>
-  <p>Všetko, čo potrebuješ vedieť o fungovaní, súkromí a možnostiach aplikácie.</p>
-</header>
+  <section>
+    <h2>🛠️ Moje projekty</h2>
 
-<section>
-  <h2><i class="fa-solid fa-shield-halved"></i>Zásady ochrany osobných údajov</h2>
-  <ul>
-    <li>Aplikácia využíva dátum narodenia a meno osôb len na pripomenutie narodenín. Údaje sú uložené výhradne lokálne v zariadení používateľa.</li>
-    <li>Zadanie mena a dátumu sa považuje za súhlas so spracovaním údajov pre účely pripomenutia narodenín.</li>
-    <li>Používateľ má právo údaje opraviť alebo vymazať priamo v aplikácii.</li>
-    <li>Aplikácia nevyžaduje registráciu, nepristupuje k polohe, kontaktom ani iným osobným údajom.</li>
-    <li>Aplikácia funguje offline, neobsahuje reklamy a nezdieľa údaje so žiadnymi tretími stranami.</li>
-  </ul>
-</section>
+    <div class="projects">
 
-<section>
-  <h2><i class="fa-solid fa-mobile-screen"></i>O aplikácii</h2>
-  <ul>
-    <li>Aplikácia je dostupná v plnej verzii úplne zadarmo.</li>
-    <li>Jednoduchý kalendár s pripomienkami na udalosti, sviatky, narodeniny a meniny.</li>
-    <li>Každý deň obsahuje zaujímavosti, historické udalosti, medzinárodné dni a citáty.</li>
-    <li>Widgety zobrazujú meniny, sviatky, narodeniny, udalosti alebo citáty priamo na ploche.</li>
-    <li>Autor ocení spätnú väzbu, nápady a návrhy na vylepšenie.</li>
-  </ul>
-</section>
+      <div class="project">
+        <h3>📅 Kalendária – offline kalendár</h3>
+        <p>
+          Android aplikácia na pripomínanie narodenín, menín, sviatkov a
+          zaujímavostí pre každý deň. Funguje offline, bez reklám a bez zberu
+          údajov.
+        </p>
+        <a href="kalendaria.html" target="_blank">Zobraziť detail projektu</a>
+      </div>
 
-<section class="contact">
-  <h2><i class="fa-solid fa-address-book"></i>Kontakt</h2>
-  <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
-  <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></p>
-  <p><i class="fa-brands fa-facebook"></i> Jozef Časnocha</p>
-  <p><i class="fa-brands fa-instagram"></i> j.casnocha</p>
-</section>
+      <div class="project">
+        <h3>📊 YouTube komentáre + sentiment</h3>
+        <p>
+          Automatizovaný zber komentárov z YouTube API s analýzou sentimentu a
+          exportom do CSV.
+        </p>
+        <a href="https://github.com/jcasnocha/youtube-sentiment" target="_blank">
+          Zobraziť na GitHube
+        </a>
+      </div>
 
-<section>
-  <h2><i class="fa-solid fa-calendar-days"></i>Funkcie aplikácie</h2>
-  <ul>
-    <li><i class="fa-solid fa-flag"></i> <b>Štátne sviatky:</b> možnosť úpravy a obnovenia predvolených.</li>
-    <li><i class="fa-solid fa-cake-candles"></i> <b>Narodeniny:</b> každoročne pripomenuté notifikáciou.</li>
-    <li><i class="fa-solid fa-star"></i> <b>Meniny:</b> vizuálna značka na widgete, ročné opakovanie.</li>
-    <li><i class="fa-solid fa-calendar-check"></i> <b>Udalosti:</b> viazané na konkrétny dátum, upozornenie v deň udalosti.</li>
-    <li><i class="fa-solid fa-quote-right"></i> <b>Citáty:</b> možnosť uložiť medzi obľúbené, kopírovať alebo zdieľať.</li>
-    <li><i class="fa-solid fa-chart-line"></i> <b>Náladová analytika:</b> hodnotenie dní, prehľady a grafy trendov.</li>
-  </ul>
-</section>
+      <div class="project">
+        <h3>🧰 Oprava vysávača</h3>
+        <p>
+          Dokumentácia a fotky z opravy batériového vysávača vrátane výmeny
+          MOSFET a testovania článkov.
+        </p>
+        <a href="https://github.com/jcasnocha/vysavac-repair" target="_blank">
+          Zobraziť na GitHube
+        </a>
+      </div>
 
-<section>
-  <h2><i class="fa-solid fa-gear"></i>Nastavenia</h2>
-  <ul>
-    <li><i class="fa-solid fa-palette"></i> <b>Farba pozadia:</b> prispôsobenie svetlému alebo tmavému režimu.</li>
-    <li><i class="fa-solid fa-font"></i> <b>Farba textu widgetu:</b> možnosť zmeny podľa preferencie používateľa.</li>
-    <li><i class="fa-solid fa-adjust"></i> <b>Priehľadnosť:</b> od 10 % do 100 % s možnosťou priesvitného widgetu.</li>
-    <li><i class="fa-solid fa-bell"></i> <b>Notifikácie:</b> možnosť povoliť alebo zakázať upozornenia.</li>
-    <li><i class="fa-solid fa-list-check"></i> <b>Štátne sviatky:</b> pridať, odstrániť alebo obnoviť predvolené.</li>
-  </ul>
-</section>
-
-<footer>
-  © 2025 Jozef Časnocha – Kalendária
-</footer>
-
+    </div>
+  </section>
 </body>
 </html>
