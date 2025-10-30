@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jcasnocha – Profil</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     :root {
-      --primary: #0077b5; /* LinkedIn blue */
+      --primary: #0077b5;
       --light-bg: #f3f2ef;
       --card-bg: #fff;
       --text-dark: #222;
@@ -21,11 +20,12 @@
       background: var(--light-bg);
       color: var(--text-dark);
       margin: 0;
-      padding: 0;
-      line-height: 1.6;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* --- Profilová sekcia --- */
+    /* === Horná časť (profil) === */
     header {
       background: var(--card-bg);
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -37,31 +37,29 @@
       z-index: 100;
     }
 
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5em;
+    }
+
     .avatar {
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      object-fit: cover;
       border: 3px solid var(--primary);
       box-shadow: 0 0 0 4px #0077b511;
-      margin-bottom: 1em;
+      object-fit: cover;
     }
 
     h1 {
-      font-size: 1.9em;
-      margin: 0.3em 0;
+      font-size: 1.8em;
+      margin: 0.2em 0;
     }
 
     .title {
       color: var(--text-light);
-      font-size: 1.05em;
-      margin-bottom: 1em;
-    }
-
-    .bio {
-      max-width: 600px;
-      margin: 0 auto 1.2em;
-      color: #444;
       font-size: 1em;
     }
 
@@ -69,7 +67,7 @@
       display: flex;
       justify-content: center;
       gap: 1em;
-      margin-bottom: 1em;
+      margin-top: 1em;
     }
 
     .socials a {
@@ -84,31 +82,35 @@
     }
 
     nav {
-      margin-top: 1em;
+      margin-top: 1.5em;
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      flex-wrap: wrap;
     }
 
     nav button {
-      background: none;
+      background: var(--primary);
       border: none;
-      color: var(--primary);
-      font-size: 1em;
-      font-weight: 600;
-      margin: 0 0.8em;
+      color: #fff;
+      padding: 0.6em 1.2em;
+      border-radius: 6px;
       cursor: pointer;
+      font-size: 0.95em;
       transition: 0.3s;
     }
 
-    nav button:hover,
-    nav button.active {
-      color: #005f91;
-      border-bottom: 2px solid var(--primary);
+    nav button:hover, nav button.active {
+      background: #005f91;
     }
 
-    /* --- Obsah --- */
+    /* === Spodná časť (dynamický obsah) === */
     main {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 2em 1em;
       max-width: 900px;
-      margin: 2em auto;
-      padding: 0 1em;
+      margin: 0 auto;
     }
 
     section {
@@ -122,20 +124,12 @@
 
     section.active {
       display: block;
+      animation: fadeIn 0.4s ease;
     }
 
-    section h2 {
-      color: var(--primary);
-      font-size: 1.4em;
-      border-bottom: 2px solid #e8e8e8;
-      padding-bottom: 0.3em;
-      margin-bottom: 1em;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.2em;
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
     }
 
     .project {
@@ -143,6 +137,7 @@
       border-radius: 8px;
       padding: 1em;
       background: #fafafa;
+      margin-bottom: 1em;
       transition: 0.3s;
     }
 
@@ -152,124 +147,89 @@
       transform: translateY(-4px);
     }
 
-    .project h3 {
-      font-size: 1.1em;
-      color: var(--primary);
-      margin-top: 0;
-    }
-
-    .project p {
-      color: var(--text-light);
-      font-size: 0.95em;
-    }
-
-    .project a {
-      color: var(--primary);
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .project a:hover {
-      text-decoration: underline;
-    }
-
     footer {
       text-align: center;
-      font-size: 0.9em;
+      font-size: 0.85em;
       color: #777;
-      margin: 3em 0 2em;
+      padding: 1em 0;
+      background: var(--light-bg);
     }
   </style>
 </head>
 
 <body>
 
+  <!-- Horná časť -->
   <header>
-    <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar">
-    <h1>Jozef Časnocha</h1>
-    <p class="title">DIY Elektronika | Python skripty | Opravy zariadení</p>
-    <p class="bio">
-      Venujem sa DIY elektronike, opravám batériových zariadení a Python skriptom na analýzu dát.  
-      Milujem praktické učenie a čistý, funkčný dizajn.
-    </p>
-
-    <div class="socials">
-      <a href="https://github.com/jcasnocha" target="_blank"><i class="fa-brands fa-github"></i></a>
-      <a href="https://linkedin.com/in/jozef-casnocha" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-      <a href="https://instagram.com/j.casnocha" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    <div class="profile">
+      <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar">
+      <h1>Jozef Časnocha</h1>
+      <p class="title">DIY Elektronika | Python skripty | Opravy zariadení</p>
+      <div class="socials">
+        <a href="https://github.com/jcasnocha" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://linkedin.com/in/jozef-casnocha" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://instagram.com/j.casnocha" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      </div>
     </div>
 
     <nav>
-      <button class="active" data-section="projekty">Projekty</button>
-      <button data-section="kontakt">Kontakt</button>
-      <button data-section="omne">O mne</button>
+      <button class="active" onclick="showSection('projekty')"><i class="fa-solid fa-briefcase"></i> Projekty</button>
+      <button onclick="showSection('kalendaria')"><i class="fa-solid fa-calendar-days"></i> Kalendária</button>
+      <button onclick="showSection('kontakt')"><i class="fa-solid fa-envelope"></i> Kontakt</button>
     </nav>
   </header>
 
+  <!-- Spodná dynamická časť -->
   <main>
-    <!-- Projekty -->
     <section id="projekty" class="active">
       <h2>🛠️ Projekty</h2>
-      <div class="projects">
-        <div class="project">
-          <h3>📅 Kalendária – offline kalendár</h3>
-          <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Funguje offline, bez reklám a bez zberu údajov.</p>
-          <a href="kalendaria.html" target="_blank">Zobraziť detail projektu</a>
-        </div>
+      <div class="project">
+        <h3>📅 Kalendária – offline kalendár</h3>
+        <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Funguje offline, bez reklám a bez zberu údajov.</p>
+      </div>
 
-        <div class="project">
-          <h3>📊 YouTube komentáre + sentiment</h3>
-          <p>Automatizovaný zber komentárov z YouTube API s analýzou sentimentu a exportom do CSV.</p>
-          <a href="https://github.com/jcasnocha/youtube-sentiment" target="_blank">Zobraziť na GitHube</a>
-        </div>
+      <div class="project">
+        <h3>📊 YouTube komentáre + sentiment</h3>
+        <p>Automatizovaný zber komentárov z YouTube API s analýzou sentimentu a exportom do CSV.</p>
+      </div>
 
-        <div class="project">
-          <h3>🧰 Oprava vysávača</h3>
-          <p>Dokumentácia a fotky z opravy batériového vysávača vrátane výmeny MOSFET a testovania článkov.</p>
-          <a href="https://github.com/jcasnocha/vysavac-repair" target="_blank">Zobraziť na GitHube</a>
-        </div>
+      <div class="project">
+        <h3>🧰 Oprava vysávača</h3>
+        <p>Dokumentácia a fotky z opravy batériového vysávača vrátane výmeny MOSFET a testovania článkov.</p>
       </div>
     </section>
 
-    <!-- Kontakt -->
+    <section id="kalendaria">
+      <h2>📅 Kalendária – Informácie o aplikácii</h2>
+      <p>Aplikácia funguje offline, neobsahuje reklamy a nezbiera osobné údaje. 
+         Umožňuje pripomínať narodeniny, meniny, sviatky a zobrazovať zaujímavosti na každý deň.</p>
+      <ul>
+        <li><b>Offline prevádzka:</b> všetky dáta ostávajú len v tvojom zariadení.</li>
+        <li><b>Widgety:</b> sviatky, narodeniny, citáty – priamo na ploche.</li>
+        <li><b>Nastavenia:</b> farby, priehľadnosť, notifikácie.</li>
+      </ul>
+    </section>
+
     <section id="kontakt">
       <h2>📩 Kontakt</h2>
       <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
       <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></p>
-    </section>
-
-    <!-- O mne -->
-    <section id="omne">
-      <h2>👨‍🔧 O mne</h2>
-      <p>Som nadšenec DIY elektroniky a technológií. Rád opravujem, analyzujem a tvorím. Zameriavam sa na funkčnosť, čistý dizajn a efektívne riešenia.</p>
-      <p>Okrem programovania v Pythone ma baví práca s hardvérom, testovanie batériových zariadení a zdieľanie poznatkov s komunitou.</p>
+      <p><i class="fa-brands fa-github"></i> <a href="https://github.com/jcasnocha" target="_blank">github.com/jcasnocha</a></p>
     </section>
   </main>
 
   <footer>
-    © 2025 Jozef Časnocha – Profil
+    © 2025 Jozef Časnocha
   </footer>
 
   <script>
-    const buttons = document.querySelectorAll('nav button');
-    const sections = document.querySelectorAll('main section');
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Odstráni aktívnu triedu zo všetkých tlačidiel
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        // Skryje všetky sekcie
-        sections.forEach(sec => sec.classList.remove('active'));
-
-        // Zobrazí vybranú sekciu
-        const target = document.getElementById(btn.dataset.section);
-        target.classList.add('active');
-      });
-    });
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
   </script>
-
 </body>
 </html>
