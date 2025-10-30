@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jcasnocha – Profil</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     :root {
       --primary: #0077b5; /* LinkedIn blue */
@@ -24,17 +25,21 @@
       line-height: 1.6;
     }
 
+    /* --- Profilová sekcia --- */
     header {
       background: var(--card-bg);
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       border-bottom: 1px solid var(--border);
-      padding: 2.5em 1em;
+      padding: 2em 1em;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .avatar {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--primary);
@@ -43,33 +48,33 @@
     }
 
     h1 {
-      font-size: 2em;
+      font-size: 1.9em;
       margin: 0.3em 0;
     }
 
     .title {
       color: var(--text-light);
-      font-size: 1.1em;
+      font-size: 1.05em;
       margin-bottom: 1em;
     }
 
     .bio {
-      max-width: 700px;
-      margin: 0 auto 1.5em;
+      max-width: 600px;
+      margin: 0 auto 1.2em;
       color: #444;
-      font-size: 1.05em;
+      font-size: 1em;
     }
 
     .socials {
       display: flex;
       justify-content: center;
       gap: 1em;
-      margin-bottom: 1.5em;
+      margin-bottom: 1em;
     }
 
     .socials a {
       color: var(--primary);
-      font-size: 1.4em;
+      font-size: 1.3em;
       transition: 0.3s;
     }
 
@@ -78,6 +83,28 @@
       transform: scale(1.1);
     }
 
+    nav {
+      margin-top: 1em;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 1em;
+      font-weight: 600;
+      margin: 0 0.8em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    nav button:hover,
+    nav button.active {
+      color: #005f91;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    /* --- Obsah --- */
     main {
       max-width: 900px;
       margin: 2em auto;
@@ -90,12 +117,16 @@
       padding: 1.5em 2em;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       margin-bottom: 2em;
+      display: none;
+    }
+
+    section.active {
+      display: block;
     }
 
     section h2 {
       color: var(--primary);
       font-size: 1.4em;
-      margin-top: 0;
       border-bottom: 2px solid #e8e8e8;
       padding-bottom: 0.3em;
       margin-bottom: 1em;
@@ -125,19 +156,17 @@
       font-size: 1.1em;
       color: var(--primary);
       margin-top: 0;
-      margin-bottom: 0.5em;
     }
 
     .project p {
       color: var(--text-light);
       font-size: 0.95em;
-      margin-bottom: 0.8em;
     }
 
     .project a {
       color: var(--primary);
-      text-decoration: none;
       font-weight: 600;
+      text-decoration: none;
     }
 
     .project a:hover {
@@ -152,11 +181,11 @@
     }
   </style>
 </head>
+
 <body>
 
   <header>
-    <!-- Ak chceš pridať fotku -->
-    <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar"> 
+    <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar">
     <h1>Jozef Časnocha</h1>
     <p class="title">DIY Elektronika | Python skripty | Opravy zariadení</p>
     <p class="bio">
@@ -165,18 +194,24 @@
     </p>
 
     <div class="socials">
-      <a href="https://github.com/jcasnocha" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-      <a href="https://linkedin.com/in/jozef-casnocha" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-      <a href="https://instagram.com/j.casnocha" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://github.com/jcasnocha" target="_blank"><i class="fa-brands fa-github"></i></a>
+      <a href="https://linkedin.com/in/jozef-casnocha" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://instagram.com/j.casnocha" target="_blank"><i class="fa-brands fa-instagram"></i></a>
     </div>
+
+    <nav>
+      <button class="active" data-section="projekty">Projekty</button>
+      <button data-section="kontakt">Kontakt</button>
+      <button data-section="omne">O mne</button>
+    </nav>
   </header>
 
   <main>
-    <section>
+    <!-- Projekty -->
+    <section id="projekty" class="active">
       <h2>🛠️ Projekty</h2>
       <div class="projects">
-
         <div class="project">
           <h3>📅 Kalendária – offline kalendár</h3>
           <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Funguje offline, bez reklám a bez zberu údajov.</p>
@@ -194,19 +229,47 @@
           <p>Dokumentácia a fotky z opravy batériového vysávača vrátane výmeny MOSFET a testovania článkov.</p>
           <a href="https://github.com/jcasnocha/vysavac-repair" target="_blank">Zobraziť na GitHube</a>
         </div>
-
       </div>
     </section>
 
-    <section>
+    <!-- Kontakt -->
+    <section id="kontakt">
       <h2>📩 Kontakt</h2>
       <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
       <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></p>
+    </section>
+
+    <!-- O mne -->
+    <section id="omne">
+      <h2>👨‍🔧 O mne</h2>
+      <p>Som nadšenec DIY elektroniky a technológií. Rád opravujem, analyzujem a tvorím. Zameriavam sa na funkčnosť, čistý dizajn a efektívne riešenia.</p>
+      <p>Okrem programovania v Pythone ma baví práca s hardvérom, testovanie batériových zariadení a zdieľanie poznatkov s komunitou.</p>
     </section>
   </main>
 
   <footer>
     © 2025 Jozef Časnocha – Profil
   </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('nav button');
+    const sections = document.querySelectorAll('main section');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Odstráni aktívnu triedu zo všetkých tlačidiel
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Skryje všetky sekcie
+        sections.forEach(sec => sec.classList.remove('active'));
+
+        // Zobrazí vybranú sekciu
+        const target = document.getElementById(btn.dataset.section);
+        target.classList.add('active');
+      });
+    });
+  </script>
+
 </body>
 </html>
