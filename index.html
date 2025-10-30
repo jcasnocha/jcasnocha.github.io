@@ -6,21 +6,29 @@
   <title>Jcasnocha – Profil</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f6f8;
-      color: #333;
-      margin: 0;
-      padding: 0;
+    :root {
+      --primary: #0077b5; /* LinkedIn blue */
+      --light-bg: #f3f2ef;
+      --card-bg: #fff;
+      --text-dark: #222;
+      --text-light: #555;
+      --border: #ddd;
     }
 
-    .profile {
-      max-width: 800px;
-      margin: 50px auto;
-      background: #fff;
-      border-radius: 12px;
-      padding: 2em;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--card-bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5em 1em;
       text-align: center;
     }
 
@@ -29,84 +37,105 @@
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 0 4px #0077b511;
       margin-bottom: 1em;
-      box-shadow: 0 0 0 4px #007acc22;
     }
 
     h1 {
       font-size: 2em;
-      margin: 0.2em 0;
+      margin: 0.3em 0;
     }
 
-    p.bio {
+    .title {
+      color: var(--text-light);
       font-size: 1.1em;
-      color: #555;
-      max-width: 600px;
-      margin: 0.5em auto 1.5em auto;
+      margin-bottom: 1em;
+    }
+
+    .bio {
+      max-width: 700px;
+      margin: 0 auto 1.5em;
+      color: #444;
+      font-size: 1.05em;
     }
 
     .socials {
       display: flex;
       justify-content: center;
-      gap: 1.2em;
-      margin-bottom: 2em;
+      gap: 1em;
+      margin-bottom: 1.5em;
     }
 
     .socials a {
-      font-size: 1.3em;
-      color: #007acc;
+      color: var(--primary);
+      font-size: 1.4em;
       transition: 0.3s;
     }
 
     .socials a:hover {
-      color: #005a99;
+      color: #005f91;
       transform: scale(1.1);
     }
 
-    h2 {
-      font-size: 1.5em;
-      margin-top: 2em;
-      border-bottom: 2px solid #eee;
-      display: inline-block;
-      padding-bottom: 4px;
-      color: #444;
+    main {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+
+    section {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5em 2em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 2em;
+    }
+
+    section h2 {
+      color: var(--primary);
+      font-size: 1.4em;
+      margin-top: 0;
+      border-bottom: 2px solid #e8e8e8;
+      padding-bottom: 0.3em;
+      margin-bottom: 1em;
     }
 
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5em;
-      margin-top: 1.5em;
-      text-align: left;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2em;
     }
 
     .project {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 1em;
       background: #fafafa;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 1.2em;
       transition: 0.3s;
     }
 
     .project:hover {
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      background: #f0f8ff;
+      border-color: var(--primary);
       transform: translateY(-4px);
     }
 
     .project h3 {
-      margin-top: 0;
       font-size: 1.1em;
-      color: #007acc;
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 0.5em;
     }
 
     .project p {
+      color: var(--text-light);
       font-size: 0.95em;
-      color: #555;
-      margin-bottom: 1em;
+      margin-bottom: 0.8em;
     }
 
     .project a {
-      color: #007acc;
+      color: var(--primary);
       text-decoration: none;
       font-weight: 600;
     }
@@ -119,54 +148,65 @@
       text-align: center;
       font-size: 0.9em;
       color: #777;
-      margin: 2em 0 1em 0;
+      margin: 3em 0 2em;
     }
   </style>
 </head>
 <body>
 
-  <div class="profile">
-    <!-- Ak chceš, pridaj fotku -->
-    <!-- <img src="moj_profil.jpg" alt="Profilová fotka" class="avatar"> -->
-
-    <h1>👋 Jcasnocha</h1>
+  <header>
+    <!-- Ak chceš pridať fotku -->
+    <!-- <img src="profil.jpg" alt="Profilová fotka" class="avatar"> -->
+    <h1>Jozef Časnocha</h1>
+    <p class="title">DIY Elektronika | Python skripty | Opravy zariadení</p>
     <p class="bio">
       Venujem sa DIY elektronike, opravám batériových zariadení a Python skriptom na analýzu dát.  
-      Milujem praktické učenie a čistý dizajn.
+      Milujem praktické učenie a čistý, funkčný dizajn.
     </p>
 
     <div class="socials">
       <a href="https://github.com/jcasnocha" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
       <a href="https://linkedin.com/in/jozef-casnocha" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://facebook.com/" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
       <a href="https://instagram.com/j.casnocha" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
     </div>
+  </header>
 
-    <h2>🛠️ Projekty</h2>
+  <main>
+    <section>
+      <h2>🛠️ Projekty</h2>
+      <div class="projects">
 
-    <div class="projects">
-      <div class="project">
-        <h3>📅 Kalendária – offline kalendár</h3>
-        <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Funguje offline, bez reklám a bez zberu údajov.</p>
-        <a href="kalendaria.html" target="_blank">Zobraziť detail</a>
+        <div class="project">
+          <h3>📅 Kalendária – offline kalendár</h3>
+          <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Funguje offline, bez reklám a bez zberu údajov.</p>
+          <a href="kalendaria.html" target="_blank">Zobraziť detail projektu</a>
+        </div>
+
+        <div class="project">
+          <h3>📊 YouTube komentáre + sentiment</h3>
+          <p>Automatizovaný zber komentárov z YouTube API s analýzou sentimentu a exportom do CSV.</p>
+          <a href="https://github.com/jcasnocha/youtube-sentiment" target="_blank">Zobraziť na GitHube</a>
+        </div>
+
+        <div class="project">
+          <h3>🧰 Oprava vysávača</h3>
+          <p>Dokumentácia a fotky z opravy batériového vysávača vrátane výmeny MOSFET a testovania článkov.</p>
+          <a href="https://github.com/jcasnocha/vysavac-repair" target="_blank">Zobraziť na GitHube</a>
+        </div>
+
       </div>
+    </section>
 
-      <div class="project">
-        <h3>📊 YouTube komentáre + sentiment</h3>
-        <p>Automatizovaný zber komentárov z YouTube API s analýzou sentimentu a exportom do CSV.</p>
-        <a href="https://github.com/jcasnocha/youtube-sentiment" target="_blank">Zobraziť na GitHube</a>
-      </div>
+    <section>
+      <h2>📩 Kontakt</h2>
+      <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
+      <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></p>
+    </section>
+  </main>
 
-      <div class="project">
-        <h3>🧰 Oprava vysávača</h3>
-        <p>Dokumentácia a fotky z opravy batériového vysávača vrátane výmeny MOSFET a testovania článkov.</p>
-        <a href="https://github.com/jcasnocha/vysavac-repair" target="_blank">Zobraziť na GitHube</a>
-      </div>
-    </div>
-
-    <footer>
-      © 2025 Jcasnocha | Osobný profil
-    </footer>
-  </div>
+  <footer>
+    © 2025 Jozef Časnocha – Profil
+  </footer>
 </body>
 </html>
