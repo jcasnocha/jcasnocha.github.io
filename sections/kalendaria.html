@@ -1,70 +1,406 @@
-<section class="project-detail">
-  <a href="#" class="back-link" onclick="backToProjects(); return false;">
-    <i class="fa-solid fa-arrow-left"></i> Späť na projekty
-  </a>
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kalendária – Informácie o aplikácii</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{
+      --bg: #f9f9f9;
+      --card: #fff;
+      --text: #666666;
+      --accent: #0077b5;
+      --gap: 14px;
+    }
+    html,body{height:100%;margin:0;padding:0;font-family: 'Segoe UI', system-ui, -apple-system, Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text);}
+    .wrap{max-width:900px;margin:24px auto;padding:16px;}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.04);padding:18px;margin-bottom:18px;}
+    h1{font-size:20px;color:var(--text);margin:0 0 8px 0;font-weight:700}
+    h2{font-size:16px;color:var(--text);margin:10px 0 8px 0;font-weight:700;display:flex;align-items:center;gap:8px}
+    p, li, .small{font-size:14px;line-height:1.45;color:var(--text)}
+    ul.simple{list-style:none;padding-left:0;margin:0}
+    ul.simple li{padding-left:0;margin:6px 0}
+    .bullet-list{margin:0;padding:0 0 0 16px}
+    .bullet-list li{margin:6px 0;list-style:disc; color:var(--text)}
+    .row{display:flex;align-items:flex-start;gap:12px;margin:8px 0}
+    .row .icon{width:24px;height:24px;flex:0 0 24px}
+    .muted{color:var(--text);font-style:italic;font-size:13px}
+    .icons-grid{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+    .icons-grid img{width:18px;height:18px;display:inline-block}
+    .back{display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none;font-weight:600;margin-bottom:12px}
+    .back i{font-size:14px}
+    .section-title{margin-top:12px;margin-bottom:6px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+    footer{margin-top:18px;text-align:center;color:#999;font-size:13px}
+    pre, code{white-space:pre-wrap;word-break:break-word;}
+    /* responsive smaller text */
+    @media (max-width:520px){
+      .wrap{padding:12px}
+      h1{font-size:18px}
+      h2{font-size:15px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
 
-  <h1>📅 Kalendária – Informácie o aplikácii</h1>
-  <p>Prehľad funkcií, zásad súkromia a možností aplikácie Kalendária.</p>
+    <a class="back" href="#" onclick="if(window.parent && window.parent.loadSection) { window.parent.loadSection('projects'); } else { history.back(); } return false;">
+      <i class="fa-solid fa-arrow-left"></i> Späť na projekty
+    </a>
 
-  <!-- 🔒 Ochrana osobných údajov -->
-  <section>
-    <h2><i class="fa-solid fa-shield-halved"></i> Zásady ochrany osobných údajov</h2>
-    <ul>
-      <li>Aplikácia umožňuje zadanie mena a dátumu narodenia – tieto údaje sú uložené len lokálne v zariadení používateľa.</li>
-      <li>Údaje nie sú odosielané na server, ani zdieľané s tretími stranami.</li>
-      <li>Používateľ má prístup k svojim údajom, môže ich upraviť alebo vymazať priamo v aplikácii.</li>
-      <li>Aplikácia nevyžaduje registráciu, nepristupuje ku kontaktom, polohe, fotografiám ani iným osobným dátam.</li>
-      <li>Funguje offline, bez reklám a bez sieťovej komunikácie.</li>
-      <li>Zásady môžu byť v budúcnosti aktualizované – odporúčame ich pravidelne kontrolovať.</li>
-    </ul>
-  </section>
+    <div class="card">
+      <h1>📢 Informácie o aplikácii Kalendária</h1>
+      <p class="muted">Prehľad funkcií, zásad ochrany osobných údajov, kontakt a nastavenia.</p>
 
-  <!-- 📱 O aplikácii -->
-  <section>
-    <h2><i class="fa-solid fa-mobile-screen"></i> O aplikácii</h2>
-    <ul>
-      <li>Aplikácia je dostupná v plnej verzii <b>zadarmo</b>.</li>
-      <li>Obsahuje kalendár s pripomienkami na sviatky, narodeniny, meniny a udalosti.</li>
-      <li>Každý deň prináša zaujímavosti, historické udalosti a citáty.</li>
-      <li>Widgety zobrazujú sviatky, narodeniny, meniny alebo citáty priamo na ploche.</li>
-      <li>Autor víta spätnú väzbu a návrhy na vylepšenie.</li>
-    </ul>
-  </section>
+      <!-- Zásady ochrany osobných údajov -->
+      <div class="section-title">
+        <h2><i class="fa-solid fa-shield-halved"></i> Zásady ochrany osobných údajov</h2>
+      </div>
+      <ul class="bullet-list">
+        <li>Aplikácia využíva funkciu zadania dátumu narodenia a mena osôb za účelom pripomenutia narodenín. Tento údaj je uložený výhradne lokálne v zariadení používateľa, nie je odosielaný na žiadny server ani zdieľaný s tretími stranami.</li>
+        <li>Zadanie dátumu narodenia a mena sa považuje za výslovný súhlas používateľa so spracovaním týchto údajov výhradne na účel pripomenutia narodenín.</li>
+        <li>Používateľ má právo na prístup k svojim údajom, ich opravu alebo vymazanie. Tieto možnosti sú dostupné priamo v aplikácii.</li>
+        <li>Aplikácia nevyžaduje registráciu, nepristupuje k kontaktom, polohe ani iným osobným údajom.</li>
+        <li>Aplikácia nezdieľa žiadne údaje s tretími stranami.</li>
+        <li>Aplikácia funguje výhradne offline a nekomunikuje so žiadnym serverom.</li>
+        <li>Aplikácia neobsahuje reklamy.</li>
+        <li>Tieto zásady môžu byť v budúcnosti aktualizované. Odporúčame používateľom pravidelne kontrolovať túto sekciu aplikácie.</li>
+      </ul>
+    </div>
 
-  <!-- 📬 Kontakt -->
-  <section>
-    <h2><i class="fa-solid fa-address-book"></i> Kontakt</h2>
-    <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
-    <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></p>
-    <p><i class="fa-brands fa-facebook"></i> Jozef Časnocha</p>
-    <p><i class="fa-brands fa-instagram"></i> j.casnocha</p>
-  </section>
+    <!-- O aplikácii -->
+    <div class="card">
+      <div class="section-title">
+        <h2><i class="fa-solid fa-info-circle"></i> O aplikácii</h2>
+      </div>
 
-  <!-- 🧩 Funkcie aplikácie -->
-  <section>
-    <h2><i class="fa-solid fa-calendar-days"></i> Funkcie aplikácie</h2>
-    <ul>
-      <li><img src="images/holiday_icon.png" alt="Sviatok" class="icon"> <b>Štátne sviatky:</b> možnosť úpravy a obnovenia predvolených.</li>
-      <li><img src="images/birthday_icon.png" alt="Narodeniny" class="icon"> <b>Narodeniny:</b> ročné pripomienky s notifikáciou.</li>
-      <li><img src="images/widget_6_background.png" alt="Meniny" class="icon"> <b>Meniny:</b> vizuálna značka na widgete, ročné opakovanie.</li>
-      <li><img src="images/event_icon.png" alt="Udalosti" class="icon"> <b>Udalosti:</b> jednorazové alebo opakované udalosti s upozornením.</li>
-      <li><img src="images/save_icon.png" alt="Citáty" class="icon"> <b>Citáty:</b> ukladaj obľúbené, zdieľaj alebo kopíruj.</li>
-      <li><img src="images/statistics_icon.png" alt="Analytika" class="icon"> <b>Náladová analytika:</b> sleduj nálady a ich trendy.</li>
-    </ul>
-  </section>
+      <ul class="bullet-list">
+        <li>Aplikácia je k dispozícii v plnej verzii pre každého <strong>ZADARMO</strong>.</li>
+        <li>Jednoduchý kalendár, ktorý obsahuje rôzne možnosti ako pridávanie pripomienok na udalosti, štátne sviatky, narodeniny, meniny.</li>
+        <li>Každý deň v kalendári má zaujímavosť: historické udalosti, medzinárodné dni a citáty.</li>
+        <li>K dispozícii sú rôzne varianty widgetov (meniny, štátne sviatky, narodeniny, udalosti, citáty).</li>
+        <li>Je to jedna z mojich prvých aplikácií — budem rád za každú spätnú väzbu, nápad alebo hlásenie chyby.</li>
+      </ul>
+    </div>
 
-  <!-- ⚙️ Nastavenia -->
-  <section>
-    <h2><i class="fa-solid fa-gear"></i> Nastavenia</h2>
-    <ul>
-      <li><img src="images/palette.png" alt="Farby" class="icon"> <b>Farba pozadia:</b> prepínanie svetlého/tmavého režimu alebo vlastné farby.</li>
-      <li><img src="images/font.png" alt="Font" class="icon"> <b>Farba textu widgetu:</b> zmena podľa preferencie.</li>
-      <li><img src="images/bell.png" alt="Notifikácie" class="icon"> <b>Notifikácie:</b> povoliť alebo zakázať upozornenia.</li>
-      <li><img src="images/list_check.png" alt="Sviatky" class="icon"> <b>Štátne sviatky:</b> pridať, odstrániť alebo obnoviť predvolené.</li>
-    </ul>
-  </section>
+    <!-- Kontakt -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <img src="images/next_button.png" alt="" style="width:24px;height:24px;opacity:0.9">
+        <h2 style="margin:0"><i class="fa-solid fa-address-book"></i> Kontakt</h2>
+      </div>
 
-  <footer>
-    © 2025 Jozef Časnocha – Kalendária
-  </footer>
-</section>
+      <div class="row">
+        <img class="icon" src="images/mail.png" alt="mail">
+        <div><span class="muted">jozef.casnocha4@gmail.com</span></div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/linkedin.png" alt="linkedin">
+        <div><a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/facebook.png" alt="facebook">
+        <div><span class="muted">Jozef Časnocha</span></div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/instagram.png" alt="instagram">
+        <div><span class="muted">j.casnocha</span></div>
+      </div>
+    </div>
+
+    <!-- Štátne sviatky -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/holiday_icon.png" alt="" style="width:20px;height:20px;margin-right:6px"> Štátny sviatok</h2>
+      </div>
+      <p class="muted" style="margin:0 0 8px 0">Je možné upraviť zoznam štátnych sviatkov v nastaveniach. Možnosť obnoviť predvolené štátne sviatky.</p>
+    </div>
+
+    <!-- Narodeniny -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/birthday_icon.png" alt="" style="width:20px;height:20px;margin-right:6px"> Narodeniny</h2>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/warning_icon.png" alt="warning">
+        <div class="muted">Vizuálna značka na widgete.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/more_icon.png" alt="more">
+        <div class="muted">Kliknutím ikony v hlavnom menu môžete zobraziť všetky narodeniny.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/see_favorites.png" alt="see favorites">
+        <div class="muted">Kliknutím ikony v detaile dňa môžete zobraziť všetky pridané narodeniny.</div>
+      </div>
+
+      <ul class="bullet-list">
+        <li class="muted">Funkcia narodeniny sa opakuje každý rok.</li>
+        <li class="muted">Budete upozornený notifikáciou v deň narodenín, ak sú povolené notifikácie.</li>
+      </ul>
+    </div>
+
+    <!-- Meniny -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/widget_6_background.png" alt="" style="width:20px;height:20px;margin-right:6px"> Meniny</h2>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/star_empty.png" alt="star">
+        <div class="muted">Ikona: meniny neuložené.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/warning_icon.png" alt="warning">
+        <div class="muted">Vizuálna značka na widgete.</div>
+      </div>
+
+      <ul class="bullet-list">
+        <li class="muted">Funkcia meniny sa opakuje každý rok.</li>
+        <li class="muted">Budete upozornený notifikáciou v deň menín, ak sú povolené notifikácie.</li>
+      </ul>
+    </div>
+
+    <!-- Iná udalosť + ikony -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/wedding.png" alt="" style="width:20px;height:20px;margin-right:6px"> Iná udalosť</h2>
+      </div>
+
+      <p class="muted">Môžeš si vybrať z pestrej palety ikon špeciálnej udalosti.</p>
+
+      <div class="icons-grid" style="margin-top:8px;">
+        <!-- tu očakávam, že nahráš tieto obrázky do images/ -->
+        <img src="images/anniversary.png" alt="anniversary">
+        <img src="images/champagne.png" alt="champagne">
+        <img src="images/plane.png" alt="plane">
+        <img src="images/handshake.png" alt="handshake">
+        <img src="images/verified.png" alt="verified">
+        <img src="images/earth.png" alt="earth">
+        <img src="images/bluepin.png" alt="bluepin">
+        <img src="images/emoji.png" alt="emoji">
+        <img src="images/redpin.png" alt="redpin">
+        <img src="images/medal.png" alt="medal">
+        <img src="images/heart.png" alt="heart">
+        <img src="images/pin.png" alt="pin">
+        <img src="images/paper.png" alt="paper">
+        <img src="images/cap.png" alt="cap">
+        <img src="images/peace.png" alt="peace">
+        <img src="images/cake.png" alt="cake">
+        <img src="images/wedding.png" alt="wedding">
+        <img src="images/promotion.png" alt="promotion">
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <img class="icon" src="images/warning_icon.png" alt="">
+        <div class="muted">Vizuálna značka na widgete.</div>
+      </div>
+
+      <div class="row">
+        <input type="checkbox" checked style="width:16px;height:16px;margin-right:8px">
+        <div class="muted">Udalosť môže byť jednorazová alebo sa môže opakovať ročne.</div>
+      </div>
+
+      <p class="muted" style="margin-top:8px">Budete upozornený notifikáciou v deň udalosti, ak sú povolené notifikácie.</p>
+    </div>
+
+    <!-- Udalosť (detail + notifikácie) -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/event_icon.png" alt="" style="width:20px;height:20px;margin-right:6px"> Udalosť</h2>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/more_icon.png" alt="more">
+        <div class="muted">Kliknutím ikony v hlavnom menu môžete zobraziť všetky udalosti.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/see_favorites.png" alt="">
+        <div class="muted">Kliknutím ikony v detaile dňa môžete zobraziť všetky udalosti.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/alarm_on.png" alt="">
+        <div class="muted">Na aktuálnu udalosť máš nastavenú notifikáciu vopred.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/alarm_off.png" alt="">
+        <div class="muted">Na aktuálnu udalosť nemáš nastavenú notifikáciu vopred.</div>
+      </div>
+
+      <div class="row">
+        <input type="checkbox" checked style="width:16px;height:16px;margin-right:8px">
+        <div class="muted">Označením nastavíš upozornenia na 1, 2, 3 a 7 dní pred udalosťou.</div>
+      </div>
+
+      <p class="muted">Funkcia Udalosť sa viaže len na konkrétny dátum. Budete upozornený notifikáciou v deň udalosti, ak sú povolené notifikácie.</p>
+    </div>
+
+    <!-- Upozornenia na widgete -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/warning_icon.png" alt="" style="width:20px;height:20px;margin-right:6px"> Upozornenie na widgete</h2>
+      </div>
+      <ul class="bullet-list">
+        <li class="muted">- Vizuálna značka na widgete.</li>
+        <li class="muted">Upozornenie na udalosť v daný dátum.</li>
+      </ul>
+    </div>
+
+    <!-- Citáty -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/save_icon.png" alt="" style="width:20px;height:20px;margin-right:6px"> Citát uložený</h2>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/save_icon_n.png" alt="">
+        <div class="muted">Citát nie je zaradený medzi obľúbené.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/more_icon.png" alt="">
+        <div class="muted">Kliknutím ikony v hlavnom menu môžete zobraziť všetky obľúbené citáty.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/see_favorites.png" alt="">
+        <div class="muted">Kliknutím ikony v detaile dňa môžete zobraziť všetky obľúbené citáty.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/share_icon.png" alt="">
+        <div class="muted">Kliknutím ikony 'Zdieľať' v detaile dňa môžete zdieľať citát alebo vytvoriť obrázok.</div>
+      </div>
+
+      <div class="row">
+        <img class="icon" src="images/copy_icon.png" alt="">
+        <div class="muted">Dlhým klikom na text citátu alebo tlačidlom 'Kopírovať' skopírujete text citátu.</div>
+      </div>
+    </div>
+
+    <!-- Refresh dňa -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/refresh_icon.png" alt="" style="width:20px;height:20px;margin-right:6px"> Refresh dňa v kalendári</h2>
+      </div>
+      <p class="muted">Kliknutím presmeruje na aktuálny deň.</p>
+    </div>
+
+    <!-- Prepínanie mesiacov -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/previous_button.png" alt="" style="width:20px;height:20px;margin-right:6px"> Prepínanie mesiacov</h2>
+      </div>
+      <p class="muted">Používatelia môžu prepínať medzi mesiacmi predchádzajúcim/následujúcim tlačidlom.</p>
+    </div>
+
+    <!-- Vyhľadávanie -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/menu_search.png" alt="" style="width:20px;height:20px;margin-right:6px"> Vyhľadávanie</h2>
+      </div>
+      <p class="muted">Vyhľadávať podľa mena alebo dátumu.</p>
+    </div>
+
+    <!-- Náladová analytika -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/statistics_icon.png" alt="" style="width:20px;height:20px;margin-right:6px"> Náladová analytika</h2>
+      </div>
+
+      <div class="row"><img class="icon" src="images/widget_6_background.png" alt=""><div class="muted">Zatiaľ nevybraný stav</div></div>
+
+      <div class="row"><img class="icon" src="images/sad_emoji.png" alt=""><div class="muted">Smutná nálada</div></div>
+      <div class="row"><img class="icon" src="images/tired_emoji.png" alt=""><div class="muted">Bolo aj lepšie</div></div>
+      <div class="row"><img class="icon" src="images/neutral_emoji.png" alt=""><div class="muted">Zlatý stred</div></div>
+      <div class="row"><img class="icon" src="images/happy_emoji.png" alt=""><div class="muted">Ušlo to</div></div>
+      <div class="row"><img class="icon" src="images/excited_emoji.png" alt=""><div class="muted">Veľmi dobrá</div></div>
+
+      <p class="muted">V sekcii nájdete týždenný, mesačný a ročný trend. Hodnotiť môžeš maximálne 3 posledné dni. Hodnotenia po 3 dňoch už nie je možné upraviť.</p>
+    </div>
+
+    <!-- Zobraz viac (prepojenia) -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/more_icon.png" alt="" style="width:20px;height:20px;margin-right:6px"> Zobraz viac</h2>
+      </div>
+      <ul class="bullet-list">
+        <li class="muted">Obľúbené citáty - zobrazí všetky citáty označené ako obľúbené.</li>
+        <li class="muted">Všetky narodeniny - zoznam všetkých pridaných narodenín.</li>
+        <li class="muted">Všetky udalosti - zoznam všetkých pridaných udalostí.</li>
+        <li class="muted">Náladová analytika - grafy nálad.</li>
+      </ul>
+    </div>
+
+    <!-- Nastavenia -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/settings.png" alt="" style="width:20px;height:20px;margin-right:6px"> Nastavenia</h2>
+      </div>
+
+      <p class="muted"><strong>Farba pozadia aplikácie</strong></p>
+      <p class="muted">Automatické nastavenie pozadia sa riadi svetlým/tmavým režimom zariadenia. K dispozícii rôzne farebné varianty meniac farbu vnútra aplikácie a widgetu.</p>
+
+      <p class="muted"><strong>Farba textu widgetu</strong></p>
+      <p class="muted">Možnosť zmeny farby písma widgetu podľa preferencie.</p>
+
+      <p class="muted"><strong>Priehľadnosť %</strong></p>
+      <p class="muted">Priehľadnosť widgetu nastaviteľná od 10% do 100% (0% = plne priehľadné).</p>
+
+      <p class="muted"><strong>Povoliť notifikácie</strong></p>
+      <div class="row">
+        <button class="btn">Povolené</button>
+        <div class="muted">Notifkácie povolené - budeme posielať upozornenia v deň udalosti (ak sú povolené v systéme).</div>
+      </div>
+
+      <div style="height:8px"></div>
+
+      <div class="row">
+        <button style="padding:8px 10px;border-radius:8px;background:#eee;border:1px solid #ddd">Povoliť</button>
+        <div class="muted">Notifkácie neaktivované</div>
+      </div>
+
+      <p class="muted"><strong>Zoznam sviatkov</strong></p>
+      <div class="row">
+        <img class="icon" src="images/delete_icon.png" alt="">
+        <div class="muted">Funkcia odstrániť štátny sviatok.</div>
+      </div>
+
+      <p class="muted">Pridať štátny sviatok / Obnoviť pôvodný zoznam štátnych sviatkov - načíta prednastavený súbor sviatkov (platné k 2025).</p>
+    </div>
+
+    <!-- Pridať udalosť -->
+    <div class="card">
+      <div class="section-title">
+        <h2><img src="images/plus.png" alt="" style="width:20px;height:20px;margin-right:6px"> Pridať udalosť / narodeniny</h2>
+      </div>
+      <p class="muted">Umožňuje pridať udalosť alebo narodeniny priamo z hlavného menu aplikácie.</p>
+    </div>
+
+    <!-- Tlačidlo spať (webová simulácia) -->
+    <div style="margin:12px 0 32px 0;text-align:center">
+      <button onclick="if(window.parent && window.parent.loadSection) { window.parent.loadSection('projects'); } else { history.back(); }" class="btn">Späť</button>
+    </div>
+
+    <footer>© 2025 Jozef Časnocha – Kalendária</footer>
+  </div>
+
+  <!-- skript len pre prípad, že tento súbor otvoríš samostatne -->
+  <script>
+    // ak sa otvára ako samostatná stránka - tlačidlo späť ide históriou
+    // ak sa používa ako fragment v indexe a parent poskytne loadSection, použije sa to (tak ako v navrhovanom index.html)
+  </script>
+</body>
+</html>
