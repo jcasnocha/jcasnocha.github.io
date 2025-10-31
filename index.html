@@ -161,6 +161,22 @@
     ul li {
       margin-bottom: 0.5em;
     }
+
+    .back-btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      margin-bottom: 1em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #005f91;
+    }
   </style>
 </head>
 
@@ -186,9 +202,10 @@
   </header>
 
   <main>
+    <!-- Projekty -->
     <section id="projekty" class="active">
       <h2>🛠️ Projekty</h2>
-      <div class="project" onclick="showSection('kalendaria')">
+      <div class="project" onclick="openProject('kalendaria')">
         <h3>📅 Kalendária – offline kalendár</h3>
         <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Klikni pre detail.</p>
       </div>
@@ -204,7 +221,9 @@
       </div>
     </section>
 
+    <!-- Detail projektu Kalendária -->
     <section id="kalendaria">
+      <a class="back-btn" onclick="backToProjects()"><i class="fa-solid fa-arrow-left"></i> Späť na projekty</a>
       <h2>📅 Kalendária – Informácie o aplikácii</h2>
       <p>Aplikácia funguje offline, neobsahuje reklamy a nezbiera osobné údaje. Umožňuje pripomínať narodeniny, meniny, sviatky a zobrazovať zaujímavosti na každý deň.</p>
       <ul>
@@ -216,7 +235,37 @@
       </ul>
     </section>
 
+    <!-- Kontakt -->
     <section id="kontakt">
       <h2>📩 Kontakt</h2>
       <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
-      <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha
+      <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></p>
+      <p><i class="fa-brands fa-github"></i> <a href="https://github.com/jcasnocha" target="_blank">github.com/jcasnocha</a></p>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Jozef Časnocha
+  </footer>
+
+  <script>
+    function showSection(id, event) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      if (event) event.target.classList.add('active');
+    }
+
+    function openProject(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function backToProjects() {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById('projekty').classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
