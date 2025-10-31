@@ -1,87 +1,147 @@
-<section id="kalendaria" class="active">
-  <a href="#" class="back-link" onclick="backToProjects(); return false;">
-    <i class="fa-solid fa-arrow-left"></i> Späť na projekty
-  </a>
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kalendária – Informácie o aplikácii</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0077b5;
+      --light-bg: #f3f2ef;
+      --card-bg: #fff;
+      --text-dark: #222;
+      --text-light: #555;
+      --border: #ddd;
+    }
 
-  <h1><i class="fa-solid fa-circle-info"></i> Kalendária – Informácie o aplikácii</h1>
-  <p>Všetko, čo potrebuješ vedieť o fungovaní, súkromí a možnostiach aplikácie Kalendária.</p>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      margin: 0;
+      line-height: 1.6;
+      padding: 0;
+    }
 
-  <section>
-    <h2><i class="fa-solid fa-shield-halved"></i>Zásady ochrany osobných údajov</h2>
+    header {
+      background: var(--card-bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-bottom: 1px solid var(--border);
+      padding: 2em 1em;
+      text-align: center;
+    }
 
-    <h3>Spracovanie údajov</h3>
-    <ul>
-      <li>Aplikácia umožňuje zadanie dátumu narodenia a mena osôb za účelom pripomenutia narodenín.</li>
-      <li>Údaje sú uložené výhradne lokálne v zariadení používateľa a nie sú odosielané na žiadny server ani zdieľané s tretími stranami.</li>
-      <li>Zadanie údajov sa považuje za výslovný súhlas používateľa so spracovaním týchto informácií výhradne na uvedený účel.</li>
-    </ul>
+    header h1 {
+      font-size: 2em;
+      margin-bottom: 0.4em;
+    }
 
-    <h3>Práva používateľa</h3>
-    <ul>
-      <li>Používateľ má právo na prístup k svojim údajom, ich opravu alebo vymazanie.</li>
-      <li>Tieto možnosti sú dostupné priamo v aplikácii bez potreby kontaktovať vývojára.</li>
-    </ul>
+    header p {
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto 1em;
+      font-size: 1.05em;
+    }
 
-    <h3>Bezpečnosť a súkromie</h3>
-    <ul>
-      <li>Aplikácia nevyžaduje registráciu.</li>
-      <li>Nepristupuje k kontaktom, polohe, fotografiám ani iným osobným údajom.</li>
-      <li>Neobsahuje reklamy a funguje výhradne offline.</li>
-      <li>Nekomunikuje so žiadnym externým serverom.</li>
-    </ul>
+    .back-link {
+      display: inline-block;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 1em;
+      transition: 0.3s;
+    }
 
-    <h3>Zmeny zásad</h3>
-    <ul>
-      <li>Zásady môžu byť v budúcnosti aktualizované.</li>
-      <li>Odporúčame používateľom pravidelne kontrolovať túto sekciu aplikácie.</li>
-    </ul>
-  </section>
+    .back-link:hover {
+      color: #005f91;
+      text-decoration: underline;
+    }
 
-  <section>
-    <h2><i class="fa-solid fa-mobile-screen"></i>O aplikácii</h2>
-    <ul>
-      <li>Aplikácia je dostupná v plnej verzii úplne zadarmo.</li>
-      <li>Jednoduchý kalendár s pripomienkami na udalosti, sviatky, narodeniny a meniny.</li>
-      <li>Každý deň obsahuje zaujímavosti, historické udalosti, medzinárodné dni a citáty.</li>
-      <li>Widgety zobrazujú meniny, sviatky, narodeniny, udalosti alebo citáty priamo na ploche.</li>
-      <li>Autor ocení spätnú väzbu, nápady a návrhy na vylepšenie.</li>
-    </ul>
-  </section>
+    main {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 0 1.5em;
+    }
 
-  <section class="contact">
-    <h2><i class="fa-solid fa-address-book"></i>Kontakt</h2>
-    <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
-    <p><i class="fa-brands fa-linkedin"></i> 
-      <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a>
-    </p>
-    <p><i class="fa-brands fa-facebook"></i> Jozef Časnocha</p>
-    <p><i class="fa-brands fa-instagram"></i> j.casnocha</p>
-  </section>
+    section {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5em 2em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 2em;
+    }
 
-  <section>
-    <h2><i class="fa-solid fa-calendar-days"></i>Funkcie aplikácie</h2>
-    <ul>
-      <li><i class="fa-solid fa-flag"></i> <b>Štátne sviatky:</b> možnosť úpravy a obnovenia predvolených.</li>
-      <li><i class="fa-solid fa-cake-candles"></i> <b>Narodeniny:</b> každoročne pripomenuté notifikáciou.</li>
-      <li><i class="fa-solid fa-star"></i> <b>Meniny:</b> vizuálna značka na widgete, ročné opakovanie.</li>
-      <li><i class="fa-solid fa-calendar-check"></i> <b>Udalosti:</b> viazané na konkrétny dátum, upozornenie v deň udalosti.</li>
-      <li><i class="fa-solid fa-quote-right"></i> <b>Citáty:</b> možnosť uložiť medzi obľúbené, kopírovať alebo zdieľať.</li>
-      <li><i class="fa-solid fa-chart-line"></i> <b>Náladová analytika:</b> hodnotenie dní, prehľady a grafy trendov.</li>
-    </ul>
-  </section>
+    section h2 {
+      color: var(--primary);
+      font-size: 1.4em;
+      margin-top: 0;
+      border-bottom: 2px solid #e8e8e8;
+      padding-bottom: 0.3em;
+      margin-bottom: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
 
-  <section>
-    <h2><i class="fa-solid fa-gear"></i>Nastavenia</h2>
-    <ul>
-      <li><i class="fa-solid fa-palette"></i> <b>Farba pozadia:</b> prispôsobenie svetlému alebo tmavému režimu.</li>
-      <li><i class="fa-solid fa-font"></i> <b>Farba textu widgetu:</b> možnosť zmeny podľa preferencie používateľa.</li>
-      <li><i class="fa-solid fa-adjust"></i> <b>Priehľadnosť:</b> od 10 % do 100 % s možnosťou priesvitného widgetu.</li>
-      <li><i class="fa-solid fa-bell"></i> <b>Notifikácie:</b> možnosť povoliť alebo zakázať upozornenia.</li>
-      <li><i class="fa-solid fa-list-check"></i> <b>Štátne sviatky:</b> pridať, odstrániť alebo obnoviť predvolené.</li>
-    </ul>
-  </section>
+    ul {
+      list-style-type: none;
+      padding-left: 1.2em;
+      margin: 0;
+    }
+
+    ul li {
+      position: relative;
+      margin: 0.5em 0;
+      padding-left: 1em;
+      color: var(--text-light);
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: #777;
+      margin: 3em 0 2em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Späť na profil</a>
+    <h1><i class="fa-solid fa-circle-info"></i> Kalendária – Informácie o aplikácii</h1>
+    <p>Všetko, čo potrebuješ vedieť o fungovaní, súkromí a možnostiach aplikácie.</p>
+  </header>
+
+  <main>
+    <!-- sem ide obsah sekcií -->
+    <section>
+      <h2><i class="fa-solid fa-shield-halved"></i> Zásady ochrany osobných údajov</h2>
+      <ul>
+        <li>Údaje sú uložené lokálne v zariadení a nie sú odosielané na žiadny server.</li>
+        <li>Aplikácia neobsahuje reklamy a funguje offline.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><i class="fa-solid fa-calendar-days"></i> Funkcie aplikácie</h2>
+      <ul>
+        <li>Pripomienky na narodeniny, meniny a sviatky.</li>
+        <li>Widgety s citátmi a udalosťami.</li>
+        <li>Možnosti prispôsobenia farieb a notifikácií.</li>
+      </ul>
+    </section>
+  </main>
 
   <footer>
     © 2025 Jozef Časnocha – Kalendária
   </footer>
-</section>
+</body>
+</html>
