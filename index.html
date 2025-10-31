@@ -23,6 +23,7 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
     header {
@@ -31,9 +32,8 @@
       border-bottom: 1px solid var(--border);
       padding: 2em 1em;
       text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      flex-shrink: 0;
+      z-index: 10;
     }
 
     .profile {
@@ -109,6 +109,8 @@
       padding: 2em 1em;
       max-width: 900px;
       margin: 0 auto;
+      width: 100%;
+      transition: opacity 0.3s ease;
     }
 
     section {
@@ -117,17 +119,6 @@
       padding: 1.5em 2em;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       margin-bottom: 2em;
-      display: none;
-    }
-
-    section.active {
-      display: block;
-      animation: fadeIn 0.4s ease;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(10px);}
-      to {opacity: 1; transform: translateY(0);}
     }
 
     .project {
@@ -154,28 +145,11 @@
       background: var(--light-bg);
     }
 
-    ul {
-      padding-left: 1.2em;
-    }
-
-    ul li {
-      margin-bottom: 0.5em;
-    }
-
-    .back-btn {
-      display: inline-block;
-      background: var(--primary);
-      color: white;
-      padding: 0.5em 1em;
-      border-radius: 6px;
-      margin-bottom: 1em;
-      cursor: pointer;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .back-btn:hover {
-      background: #005f91;
+    .loading {
+      text-align: center;
+      color: var(--text-light);
+      font-style: italic;
+      margin-top: 2em;
     }
   </style>
 </head>
@@ -196,167 +170,13 @@
     </div>
 
     <nav>
-      <button class="active" onclick="showSection('projekty', event)"><i class="fa-solid fa-briefcase"></i> Projekty</button>
-      <button onclick="showSection('kontakt', event)"><i class="fa-solid fa-envelope"></i> Kontakt</button>
+      <button class="active" onclick="loadSection('projects', event)"><i class="fa-solid fa-briefcase"></i> Projekty</button>
+      <button onclick="loadSection('contact', event)"><i class="fa-solid fa-envelope"></i> Kontakt</button>
     </nav>
   </header>
 
-  <main>
-    <!-- Projekty -->
-    <section id="projekty" class="active">
-      <h2>🛠️ Projekty</h2>
-      <div class="project" onclick="openProject('kalendaria')">
-        <h3>📅 Kalendária – offline kalendár</h3>
-        <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Klikni pre detail.</p>
-      </div>
-
-      <div class="project">
-        <h3>📊 YouTube komentáre + sentiment</h3>
-        <p>Automatizovaný zber komentárov z YouTube API s analýzou sentimentu a exportom do CSV.</p>
-      </div>
-
-      <div class="project">
-        <h3>🧰 Oprava vysávača</h3>
-        <p>Dokumentácia a fotky z opravy batériového vysávača vrátane výmeny MOSFET a testovania článkov.</p>
-      </div>
-    </section>
-
-    <!-- Detail projektu Kalendária -->
-<section id="kalendaria" class="active">
-  <a href="#" class="back-link" onclick="backToProjects(); return false;">
-    <i class="fa-solid fa-arrow-left"></i> Späť na projekty
-  </a>
-
-  <h1><i class="fa-solid fa-circle-info"></i> Kalendária – Informácie o aplikácii</h1>
-  <p>Všetko, čo potrebuješ vedieť o fungovaní, súkromí a možnostiach aplikácie Kalendária.</p>
-
-  <section>
-    <h2><i class="fa-solid fa-shield-halved"></i>Zásady ochrany osobných údajov</h2>
-
-    <h3>Spracovanie údajov</h3>
-    <ul>
-      <li>Aplikácia umožňuje zadanie dátumu narodenia a mena osôb za účelom pripomenutia narodenín.</li>
-      <li>Údaje sú uložené výhradne lokálne v zariadení používateľa a nie sú odosielané na žiadny server ani zdieľané s tretími stranami.</li>
-      <li>Zadanie údajov sa považuje za výslovný súhlas používateľa so spracovaním týchto informácií výhradne na uvedený účel.</li>
-    </ul>
-
-    <h3>Práva používateľa</h3>
-    <ul>
-      <li>Používateľ má právo na prístup k svojim údajom, ich opravu alebo vymazanie.</li>
-      <li>Tieto možnosti sú dostupné priamo v aplikácii bez potreby kontaktovať vývojára.</li>
-    </ul>
-
-    <h3>Bezpečnosť a súkromie</h3>
-    <ul>
-      <li>Aplikácia nevyžaduje registráciu.</li>
-      <li>Nepristupuje k kontaktom, polohe, fotografiám ani iným osobným údajom.</li>
-      <li>Neobsahuje reklamy a funguje výhradne offline.</li>
-      <li>Nekomunikuje so žiadnym externým serverom.</li>
-    </ul>
-
-    <h3>Zmeny zásad</h3>
-    <ul>
-      <li>Zásady môžu byť v budúcnosti aktualizované.</li>
-      <li>Odporúčame používateľom pravidelne kontrolovať túto sekciu aplikácie.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2><i class="fa-solid fa-mobile-screen"></i>O aplikácii</h2>
-    <ul>
-      <li>Aplikácia je dostupná v plnej verzii úplne zadarmo.</li>
-      <li>Jednoduchý kalendár s pripomienkami na udalosti, sviatky, narodeniny a meniny.</li>
-      <li>Každý deň obsahuje zaujímavosti, historické udalosti, medzinárodné dni a citáty.</li>
-      <li>Widgety zobrazujú meniny, sviatky, narodeniny, udalosti alebo citáty priamo na ploche.</li>
-      <li>Autor ocení spätnú väzbu, nápady a návrhy na vylepšenie.</li>
-    </ul>
-  </section>
-
-  <section class="contact">
-    <h2><i class="fa-solid fa-address-book"></i>Kontakt</h2>
-    <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
-    <p><i class="fa-brands fa-linkedin"></i> 
-      <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a>
-    </p>
-    <p><i class="fa-brands fa-facebook"></i> Jozef Časnocha</p>
-    <p><i class="fa-brands fa-instagram"></i> j.casnocha</p>
-  </section>
-
-  <section>
-    <h2><i class="fa-solid fa-calendar-days"></i>Funkcie aplikácie</h2>
-    <ul>
-      <li><i class="fa-solid fa-flag"></i> <b>Štátne sviatky:</b> možnosť úpravy a obnovenia predvolených.</li>
-      <li><i class="fa-solid fa-cake-candles"></i> <b>Narodeniny:</b> každoročne pripomenuté notifikáciou.</li>
-      <li><i class="fa-solid fa-star"></i> <b>Meniny:</b> vizuálna značka na widgete, ročné opakovanie.</li>
-      <li><i class="fa-solid fa-calendar-check"></i> <b>Udalosti:</b> viazané na konkrétny dátum, upozornenie v deň udalosti.</li>
-      <li><i class="fa-solid fa-quote-right"></i> <b>Citáty:</b> možnosť uložiť medzi obľúbené, kopírovať alebo zdieľať.</li>
-      <li><i class="fa-solid fa-chart-line"></i> <b>Náladová analytika:</b> hodnotenie dní, prehľady a grafy trendov.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2><i class="fa-solid fa-gear"></i>Nastavenia</h2>
-    <ul>
-      <li><i class="fa-solid fa-palette"></i> <b>Farba pozadia:</b> prispôsobenie svetlému alebo tmavému režimu.</li>
-      <li><i class="fa-solid fa-font"></i> <b>Farba textu widgetu:</b> možnosť zmeny podľa preferencie používateľa.</li>
-      <li><i class="fa-solid fa-adjust"></i> <b>Priehľadnosť:</b> od 10 % do 100 % s možnosťou priesvitného widgetu.</li>
-      <li><i class="fa-solid fa-bell"></i> <b>Notifikácie:</b> možnosť povoliť alebo zakázať upozornenia.</li>
-      <li><i class="fa-solid fa-list-check"></i> <b>Štátne sviatky:</b> pridať, odstrániť alebo obnoviť predvolené.</li>
-    </ul>
-  </section>
-
-  <footer>
-    © 2025 Jozef Časnocha – Kalendária
-  </footer>
-</section>
-
-
-  <section class="contact">
-    <h2><i class="fa-solid fa-address-book"></i>Kontakt</h2>
-    <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
-    <p><i class="fa-brands fa-linkedin"></i> 
-      <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a>
-    </p>
-    <p><i class="fa-brands fa-facebook"></i> Jozef Časnocha</p>
-    <p><i class="fa-brands fa-instagram"></i> j.casnocha</p>
-  </section>
-
-  <section>
-    <h2><i class="fa-solid fa-calendar-days"></i>Funkcie aplikácie</h2>
-    <ul>
-      <li><i class="fa-solid fa-flag"></i> <b>Štátne sviatky:</b> možnosť úpravy a obnovenia predvolených.</li>
-      <li><i class="fa-solid fa-cake-candles"></i> <b>Narodeniny:</b> každoročne pripomenuté notifikáciou.</li>
-      <li><i class="fa-solid fa-star"></i> <b>Meniny:</b> vizuálna značka na widgete, ročné opakovanie.</li>
-      <li><i class="fa-solid fa-calendar-check"></i> <b>Udalosti:</b> viazané na konkrétny dátum, upozornenie v deň udalosti.</li>
-      <li><i class="fa-solid fa-quote-right"></i> <b>Citáty:</b> možnosť uložiť medzi obľúbené, kopírovať alebo zdieľať.</li>
-      <li><i class="fa-solid fa-chart-line"></i> <b>Náladová analytika:</b> hodnotenie dní, prehľady a grafy trendov.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2><i class="fa-solid fa-gear"></i>Nastavenia</h2>
-    <ul>
-      <li><i class="fa-solid fa-palette"></i> <b>Farba pozadia:</b> prispôsobenie svetlému alebo tmavému režimu.</li>
-      <li><i class="fa-solid fa-font"></i> <b>Farba textu widgetu:</b> možnosť zmeny podľa preferencie používateľa.</li>
-      <li><i class="fa-solid fa-adjust"></i> <b>Priehľadnosť:</b> od 10 % do 100 % s možnosťou priesvitného widgetu.</li>
-      <li><i class="fa-solid fa-bell"></i> <b>Notifikácie:</b> možnosť povoliť alebo zakázať upozornenia.</li>
-      <li><i class="fa-solid fa-list-check"></i> <b>Štátne sviatky:</b> pridať, odstrániť alebo obnoviť predvolené.</li>
-    </ul>
-  </section>
-
-  <footer>
-    © 2025 Jozef Časnocha – Kalendária
-  </footer>
-</section>
-
-
-    <!-- Kontakt -->
-    <section id="kontakt">
-      <h2>📩 Kontakt</h2>
-      <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
-      <p><i class="fa-brands fa-linkedin"></i> <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a></p>
-      <p><i class="fa-brands fa-github"></i> <a href="https://github.com/jcasnocha" target="_blank">github.com/jcasnocha</a></p>
-    </section>
+  <main id="content">
+    <!-- Sem sa načítava dynamický obsah -->
   </main>
 
   <footer>
@@ -364,21 +184,51 @@
   </footer>
 
   <script>
-    function showSection(id, event) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
-      if (event) event.target.classList.add('active');
+    // Načítanie úvodnej sekcie
+    document.addEventListener("DOMContentLoaded", () => {
+      loadSection('projects');
+    });
+
+    function loadSection(section, event) {
+      if (event) {
+        document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+      }
+
+      const content = document.getElementById('content');
+      content.style.opacity = 0.5;
+      content.innerHTML = "<p class='loading'>Načítavam...</p>";
+
+      let file = '';
+      if (section === 'projects') file = 'sections/projects.html';
+      else if (section === 'contact') file = 'sections/contact.html';
+
+      fetch(file)
+        .then(res => res.text())
+        .then(html => {
+          content.innerHTML = html;
+          content.style.opacity = 1;
+        })
+        .catch(() => {
+          content.innerHTML = "<p class='loading'>Nepodarilo sa načítať obsah 😢</p>";
+        });
     }
 
-    function openProject(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+    // Načítanie detailu projektu bez reloadu
+    function openProject(file) {
+      const content = document.getElementById('content');
+      content.style.opacity = 0.5;
+      content.innerHTML = "<p class='loading'>Načítavam detail projektu...</p>";
 
-    function backToProjects() {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById('projekty').classList.add('active');
+      fetch(file)
+        .then(res => res.text())
+        .then(html => {
+          content.innerHTML = html;
+          content.style.opacity = 1;
+        })
+        .catch(() => {
+          content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>";
+        });
     }
   </script>
 
