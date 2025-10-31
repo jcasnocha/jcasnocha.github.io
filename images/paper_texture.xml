@@ -1,0 +1,101 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="300dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300">
+
+    <!-- Jemné tiene ako záhyby -->
+    <path
+        android:fillColor="#000000"
+        android:fillAlpha="0.03"
+        android:pathData="M20,40 C60,20 240,20 280,40 L280,260 C240,280 60,280 20,260 Z" />
+
+    <!-- Nepravidelné šrafovanie -->
+    <path
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="0.5"
+        android:pathData="M0,30 Q150,32 300,25
+                          M0,90 Q150,88 300,85
+                          M0,150 Q150,148 300,145
+                          M0,210 Q150,208 300,205" />
+
+    <!-- Šmuhy – nepravidelné výplne -->
+    <path
+        android:fillColor="#000000"
+        android:fillAlpha="0.015"
+        android:pathData="M100,150 C120,140 180,160 200,150 C180,170 120,170 100,150 Z" />
+
+    <path
+        android:fillColor="#000000"
+        android:fillAlpha="0.01"
+        android:pathData="M60,220 C80,210 220,210 240,220 C220,230 80,230 60,220 Z" />
+
+    <!-- Chaotické škrabance rôznych veľkostí -->
+    <path
+        android:strokeColor="#4D000000"
+        android:strokeWidth="0.3"
+        android:pathData="M12,18 L28,22 M45,35 L52,33 M70,60 L90,65
+                          M110,40 L130,42 M150,80 L155,78 M180,100 L210,105
+                          M220,60 L225,63 M250,90 L270,95 M280,30 L290,28
+                          M20,160 L40,155 M60,180 L75,185 M100,200 L120,198
+                          M140,220 L160,225 M180,240 L195,238 M210,260 L230,265
+                          M260,280 L275,278 M30,270 L50,268 M80,250 L95,252
+                          M120,230 L135,232 M160,210 L175,212 M200,190 L215,192
+                          M240,170 L255,172 M270,150 L285,152 M20,130 L35,128
+                          M60,110 L75,112 M100,90 L115,88 M140,70 L155,72
+                          M180,50 L195,48 M220,30 L235,32" />
+    <!-- Chaotické škrabance rôznych veľkostí a uhlov -->
+    <path
+        android:strokeColor="#4D000000"
+        android:strokeWidth="0.3"
+        android:pathData="
+            M12,18 L28,22
+            M45,35 L52,33
+            M70,60 L90,65
+            M110,40 L130,42
+            M150,80 L155,78
+            M180,100 L210,105
+            M220,60 L225,63
+            M250,90 L270,95
+            M280,30 L290,28
+            M20,160 L40,155
+            M60,180 L75,185
+            M100,200 L120,198
+            M140,220 L160,225
+            M180,240 L195,238
+            M210,260 L230,265
+            M260,280 L275,278
+            M30,270 L50,268
+            M80,250 L95,252
+            M120,230 L135,232
+            M160,210 L175,212
+            M200,190 L215,192
+            M240,170 L255,172
+            M270,150 L285,152
+            M20,130 L35,128
+            M60,110 L75,112
+            M100,90 L115,88
+            M140,70 L155,72
+            M180,50 L195,48
+            M220,30 L235,32
+            M50,50 L70,70
+            M90,60 L110,80
+            M130,90 L150,110
+            M170,120 L190,140
+            M210,150 L230,170
+            M250,180 L270,200
+            M60,240 L80,260
+            M100,270 L120,290
+            M30,200 L50,220
+            M10,100 L30,120
+            M270,20 L290,40
+            M200,60 L220,80
+            M150,30 L170,50
+            M80,10 L100,30
+            M40,140 L60,160
+            M90,180 L110,200
+            M160,250 L180,270
+            M220,220 L240,240
+            M260,100 L280,120" />
+
+</vector>
