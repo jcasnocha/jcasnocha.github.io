@@ -15,54 +15,53 @@
       --border: #ddd;
     }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: var(--light-bg);
-  color: var(--text-dark);
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* namiesto height: 100vh */
-  overflow-x: hidden; /* nechaj horizontálne skryté, vertikálne nech scrolluje */
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh; /* fixné výškové rozloženie */
+      overflow: hidden;
+    }
 
+    header {
+      background: var(--card-bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-bottom: 1px solid var(--border);
+      padding: 2em 1em;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.4s ease;
+    }
 
-  header {
-    background: var(--card-bg);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border-bottom: 1px solid var(--border);
-    padding: 2em 1em;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    transition: all 0.4s ease;
-  }
+    header.shrink {
+      padding: 0.8em 1em;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(6px);
+    }
 
-  header.shrink {
-    padding: 0.8em 1em;
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(6px);
-  }
+    header.shrink .avatar {
+      width: 60px;
+      height: 60px;
+      border-width: 2px;
+    }
 
-  header.shrink .avatar {
-    width: 60px;
-    height: 60px;
-    border-width: 2px;
-  }
+    header.shrink h1 {
+      font-size: 1.2em;
+    }
 
-  header.shrink h1 {
-    font-size: 1.2em;
-  }
+    header.shrink .title {
+      display: none;
+    }
 
-  header.shrink .title {
-    display: none;
-  }
-
-  header.shrink .socials {
-    margin-top: 0.5em;
-    gap: 0.6em;
-  }
+    header.shrink .socials {
+      margin-top: 0.5em;
+      gap: 0.6em;
+    }
 
     .profile {
       display: flex;
@@ -131,14 +130,15 @@ body {
       background: #005f91;
     }
 
-main {
-  flex-grow: 1;
-  padding: 2em 1em;
-  max-width: 900px;
-  margin: 0 auto;
-  width: 100%;
-  transition: opacity 0.3s ease;
-}
+    main {
+      flex-grow: 1;
+      overflow-y: auto; /* povolí scroll len vnútri main */
+      padding: 2em 1em;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      transition: opacity 0.3s ease;
+    }
 
     section {
       background: var(--card-bg);
@@ -179,33 +179,6 @@ main {
       margin-top: 2em;
     }
   </style>
-<script>
-let lastScroll = 0;
-const header = document.querySelector("header");
-
-window.addEventListener("scroll", () => {
-  const currentScroll = window.scrollY;
-
-  // Ak sme úplne hore → vždy zobraz plnú hlavičku
-  if (currentScroll <= 0) {
-    header.classList.remove("shrink");
-    lastScroll = 0;
-    return;
-  }
-
-  // Scrolluješ dole a presiahol si 120px → minimalizuj
-  if (currentScroll > lastScroll && currentScroll > 120) {
-    header.classList.add("shrink");
-  }
-
-  // Scrolluješ hore → vráť hlavičku naspäť, ale až keď sa posunieš hore viac než o 60px
-  else if (currentScroll < lastScroll - 60) {
-    header.classList.remove("shrink");
-  }
-
-  lastScroll = currentScroll;
-});
-</script>
 </head>
 
 <body>
@@ -230,44 +203,43 @@ window.addEventListener("scroll", () => {
   </header>
 
   <main id="content">
-    <!-- Sem sa načítava dynamický obsah -->
+    <section>
+      <h2>🛠️ Projekty</h2>
+      <div class="project"><h3>📅 Kalendária</h3><p>Offline kalendár s pripomienkami, meninami a citátmi.</p></div>
+      <div class="project"><h3>📊 YouTube komentáre + sentiment</h3><p>Analýza komentárov pomocou Pythonu a NLP.</p></div>
+      <div class="project"><h3>🧰 Oprava vysávača</h3><p>Dokumentácia opravy a výmena MOSFETov.</p></div>
+    </section>
   </main>
 
   <footer>
     © 2025 Jozef Časnocha
   </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector("header");
-  const main = document.querySelector("main");
-  let lastScroll = 0;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const header = document.querySelector("header");
+      const main = document.querySelector("main");
+      let lastScroll = 0;
 
-  main.addEventListener("scroll", () => {
-    const currentScroll = main.scrollTop;
+      main.addEventListener("scroll", () => {
+        const currentScroll = main.scrollTop;
 
-    // Ak si úplne hore – hlavička v plnej veľkosti
-    if (currentScroll <= 0) {
-      header.classList.remove("shrink");
-      lastScroll = 0;
-      return;
-    }
+        if (currentScroll <= 0) {
+          header.classList.remove("shrink");
+          lastScroll = 0;
+          return;
+        }
 
-    // Scrolluješ dole a presiahol si 120 px → minimalizuj
-    if (currentScroll > lastScroll && currentScroll > 120) {
-      header.classList.add("shrink");
-    }
+        if (currentScroll > lastScroll && currentScroll > 120) {
+          header.classList.add("shrink");
+        } else if (currentScroll < lastScroll - 60) {
+          header.classList.remove("shrink");
+        }
 
-    // Scrolluješ hore → vráť hlavičku naspäť až po 60 px hore
-    else if (currentScroll < lastScroll - 60) {
-      header.classList.remove("shrink");
-    }
-
-    lastScroll = currentScroll;
-  });
-});
-</script>
-
+        lastScroll = currentScroll;
+      });
+    });
+  </script>
 
 </body>
 </html>
