@@ -249,6 +249,22 @@
       });
     });
   </script>
+<script>
+  function openProject(file) {
+    const content = document.getElementById("content");
+    content.style.opacity = 0.4;
+    content.innerHTML = "<p class='loading'>Načítavam projekt...</p>";
 
+    fetch(file)
+      .then(res => res.text())
+      .then(html => {
+        content.innerHTML = html;
+        content.style.opacity = 1;
+      })
+      .catch(() => {
+        content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>";
+      });
+  }
+</script>
 </body>
 </html>
