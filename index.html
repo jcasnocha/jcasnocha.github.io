@@ -237,54 +237,37 @@ window.addEventListener("scroll", () => {
     © 2025 Jozef Časnocha
   </footer>
 
-  <script>
-    // Načítanie úvodnej sekcie
-    document.addEventListener("DOMContentLoaded", () => {
-      loadSection('projects');
-    });
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector("header");
+  const main = document.querySelector("main");
+  let lastScroll = 0;
 
-    function loadSection(section, event) {
-      if (event) {
-        document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-      }
+  main.addEventListener("scroll", () => {
+    const currentScroll = main.scrollTop;
 
-      const content = document.getElementById('content');
-      content.style.opacity = 0.5;
-      content.innerHTML = "<p class='loading'>Načítavam...</p>";
-
-      let file = '';
-      if (section === 'projects') file = 'sections/projects.html';
-      else if (section === 'contact') file = 'sections/contact.html';
-
-      fetch(file)
-        .then(res => res.text())
-        .then(html => {
-          content.innerHTML = html;
-          content.style.opacity = 1;
-        })
-        .catch(() => {
-          content.innerHTML = "<p class='loading'>Nepodarilo sa načítať obsah 😢</p>";
-        });
+    // Ak si úplne hore – hlavička v plnej veľkosti
+    if (currentScroll <= 0) {
+      header.classList.remove("shrink");
+      lastScroll = 0;
+      return;
     }
 
-    // Načítanie detailu projektu bez reloadu
-    function openProject(file) {
-      const content = document.getElementById('content');
-      content.style.opacity = 0.5;
-      content.innerHTML = "<p class='loading'>Načítavam detail projektu...</p>";
-
-      fetch(file)
-        .then(res => res.text())
-        .then(html => {
-          content.innerHTML = html;
-          content.style.opacity = 1;
-        })
-        .catch(() => {
-          content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>";
-        });
+    // Scrolluješ dole a presiahol si 120 px → minimalizuj
+    if (currentScroll > lastScroll && currentScroll > 120) {
+      header.classList.add("shrink");
     }
-  </script>
+
+    // Scrolluješ hore → vráť hlavičku naspäť až po 60 px hore
+    else if (currentScroll < lastScroll - 60) {
+      header.classList.remove("shrink");
+    }
+
+    lastScroll = currentScroll;
+  });
+});
+</script>
+
 
 </body>
 </html>
