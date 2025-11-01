@@ -204,42 +204,86 @@
     © 2025 Jozef Časnocha
   </footer>
 
-  <script>
-    const sections = {
-      projects: `
-        <section>
-          <h2>🛠️ Projekty</h2>
-          ${Array(7).fill(`
-            <div class="project" onclick="openProject('sections/kalendaria.html')">
-              <h3>📅 Kalendária – offline kalendár</h3>
-              <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Klikni pre detail.</p>
-            </div>
-          `).join('')}
-          <div class="project">
-            <h3>📊 YouTube komentáre + sentiment</h3>
-            <p>Automatizovaný zber komentárov z YouTube API s analýzou sentimentu a exportom do CSV.</p>
+<script>
+  const sections = {
+    projects: `
+      <section>
+        <h2>🛠️ Projekty</h2>
+        ${Array(7).fill(`
+          <div class="project" onclick="openProject('sections/kalendaria.html')">
+            <h3>📅 Kalendária – offline kalendár</h3>
+            <p>Android aplikácia na pripomínanie narodenín, menín, sviatkov a zaujímavostí pre každý deň. Klikni pre detail.</p>
           </div>
-          <div class="project">
-            <h3>🧰 Oprava vysávača</h3>
-            <p>Dokumentácia a fotky z opravy batériového vysávača vrátane výmeny MOSFET a testovania článkov.</p>
-          </div>
-        </section>
-      `,
-      contact: `
-        <section>
-          <h2>📩 Kontakt</h2>
-          <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
-          <p><i class="fa-brands fa-linkedin"></i> 
-            <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a>
-          </p>
-          <p><i class="fa-brands fa-github"></i> 
-            <a href="https://github.com/jcasnocha" target="_blank">github.com/jcasnocha</a>
-          </p>
-        </section>
-      `
+        `).join('')}
+        <div class="project">
+          <h3>📊 YouTube komentáre + sentiment</h3>
+          <p>Automatizovaný zber komentárov z YouTube API s analýzou sentimentu a exportom do CSV.</p>
+        </div>
+        <div class="project">
+          <h3>🧰 Oprava vysávača</h3>
+          <p>Dokumentácia a fotky z opravy batériového vysávača vrátane výmeny MOSFET a testovania článkov.</p>
+        </div>
+      </section>
+    `,
+    contact: `
+      <section>
+        <h2>📩 Kontakt</h2>
+        <p><i class="fa-solid fa-envelope"></i> jozef.casnocha4@gmail.com</p>
+        <p><i class="fa-brands fa-linkedin"></i> 
+          <a href="https://linkedin.com/in/jozef-casnocha" target="_blank">linkedin.com/in/jozef-casnocha</a>
+        </p>
+        <p><i class="fa-brands fa-github"></i> 
+          <a href="https://github.com/jcasnocha" target="_blank">github.com/jcasnocha</a>
+        </p>
+      </section>
+    `
+  };
+
+  function showSection(name, btn) {
+    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const content = document.getElementById("content");
+    content.innerHTML = sections[name];
+    monitorScrollForHeaderShrink();
+  }
+
+  function openProject(file) {
+    const content = document.getElementById("content");
+    content.innerHTML = "<p class='loading'>Načítavam projekt...</p>";
+    fetch(file)
+      .then(res => res.text())
+      .then(html => {
+        content.innerHTML = html;
+        monitorScrollForHeaderShrink();
+      })
+      .catch(() => {
+        content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>";
+      });
+  }
+
+  function monitorScrollForHeaderShrink() {
+    const header = document.getElementById("pageHeader");
+    const content = document.getElementById("content");
+    let lastScroll = 0;
+
+    content.removeEventListener("scroll", header._scrollHandler); // odstráni starý handler, ak existuje
+
+    const handler = () => {
+      const currentScroll = content.scrollTop;
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.classList.add("shrink");
+      } else if (currentScroll < lastScroll - 60 || currentScroll <= 0) {
+        header.classList.remove("shrink");
+      }
+      lastScroll = currentScroll;
     };
 
-    function showSection(name, btn) {
-      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      const content = document.getElement
+    content.addEventListener("scroll", handler);
+    header._scrollHandler = handler; // uloží handler pre neskoršie odstránenie
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const defaultBtn = document.querySelector("nav button.active");
+    showSection("projects", defaultBtn);
+  });
+</script>
