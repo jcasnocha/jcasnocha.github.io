@@ -25,24 +25,29 @@
       height: 100vh;
     }
 
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  padding: 2em 1em;
-  text-align: center;
-  transition: all 0.3s ease;
-}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 2em 1em;
+      text-align: center;
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
 
-header .profile {
-  transform: scale(var(--scale, 1));
-  opacity: var(--opacity, 1);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform-origin: top center;
-}
+    header.hide {
+      transform: translateY(-100%);
+    }
+
+    header .profile {
+      transform: scale(var(--scale, 1));
+      opacity: var(--opacity, 1);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: top center;
+    }
 
     header.shrink {
       padding: 0.8em 1em;
@@ -210,7 +215,6 @@ header .profile {
   <footer>
     © 2025 Jozef Časnocha
   </footer>
-
 <script>
   const sections = {
     projects: `
