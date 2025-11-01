@@ -13,6 +13,10 @@
       --text-dark: #222;
       --text-light: #555;
       --border: #ddd;
+      --header-height: 220px;
+      --avatar-size: 120px;
+      --scale: 1;
+      --opacity: 1;
     }
 
     body {
@@ -25,59 +29,38 @@
       height: 100vh;
     }
 
-header {
-  padding: var(--header-padding, 2em) 1em;
-  transition: padding 0.3s ease;
-}
-
-.avatar {
-  width: var(--avatar-size, 120px);
-  height: var(--avatar-size, 120px);
-  transition: width 0.3s ease, height 0.3s ease;
-}
-
-header .profile {
-  transform: scale(var(--scale, 1));
-  opacity: var(--opacity, 1);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform-origin: top center;
-}
-
-    header.hide {
-      transform: translateY(-100%);
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: var(--header-height);
+      transition: height 0.3s ease;
+      overflow: hidden;
+      text-align: center;
     }
 
-
-    header.shrink {
-      padding: 0.8em 1em;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(6px);
-    }
-
-    header.shrink .avatar {
-      width: 60px;
-      height: 60px;
-      border-width: 2px;
-    }
-
-    header.shrink h1 {
-      font-size: 1.2em;
-    }
-
-    header.shrink .title {
-      display: none;
-    }
-
-    header.shrink .socials {
-      gap: 0.6em;
-      margin-top: 0.5em;
-    }
-
-    .profile {
+    header .profile {
+      transform: scale(var(--scale));
+      opacity: var(--opacity);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: top center;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.5em;
+    }
+
+    .avatar {
+      width: var(--avatar-size);
+      height: var(--avatar-size);
+      border-radius: 50%;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 0 4px #0077b511;
+      object-fit: cover;
+      transition: width 0.3s ease, height 0.3s ease;
     }
 
     h1 {
@@ -207,7 +190,7 @@ header .profile {
   </footer>
 
 
-  <script>
+ <script>
   const sections = {
     projects: `
       <section>
@@ -264,32 +247,32 @@ header .profile {
       });
   }
 
-function monitorScrollForHeaderShrink() {
-  const header = document.getElementById("pageHeader");
-  const content = document.getElementById("content");
+  function monitorScrollForHeaderShrink() {
+    const header = document.getElementById("pageHeader");
+    const content = document.getElementById("content");
 
-  content.removeEventListener("scroll", header._scrollHandler);
+    content.removeEventListener("scroll", header._scrollHandler);
 
-  const handler = () => {
-    const scrollY = content.scrollTop;
-    const maxScroll = 200;
+    const handler = () => {
+      const scrollY = content.scrollTop;
+      const maxScroll = 200;
 
-const progress = Math.min(scrollY / 200, 1);
+      const progress = Math.min(scrollY / maxScroll, 1);
 
-const scale = 1 - progress * 0.5; // zmenšiť až na 50 %
-const opacity = 1 - progress * 0.3;
-const avatarSize = 120 - progress * 80; // zmenšiť z 120px na 40px
-const padding = 2 - progress * 1.5; // zmenšiť z 2em na 0.5em
+      const scale = 1 - progress * 0.3;
+      const opacity = 1 - progress * 0.2;
+      const avatarSize = 120 - progress * 60; // zmenšiť z 120px na 60px
+      const headerHeight = 220 - progress * 100; // zmenšiť z 220px na 120px
 
-header.style.setProperty("--scale", scale.toFixed(2));
-header.style.setProperty("--opacity", opacity.toFixed(2));
-header.style.setProperty("--avatar-size", `${avatarSize.toFixed(0)}px`);
-header.style.setProperty("--header-padding", `${padding.toFixed(2)}em`);
-  };
+      header.style.setProperty("--scale", scale.toFixed(2));
+      header.style.setProperty("--opacity", opacity.toFixed(2));
+      header.style.setProperty("--avatar-size", `${avatarSize.toFixed(0)}px`);
+      header.style.setProperty("--header-height", `${headerHeight.toFixed(0)}px`);
+    };
 
-  content.addEventListener("scroll", handler);
-  header._scrollHandler = handler;
-}
+    content.addEventListener("scroll", handler);
+    header._scrollHandler = handler;
+  }
 
   document.addEventListener("DOMContentLoaded", () => {
     const defaultBtn = document.querySelector("nav button.active");
