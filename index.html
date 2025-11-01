@@ -22,7 +22,7 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      height: 100vh; /* fixné výškové rozloženie */
+      height: 100vh;
       overflow: hidden;
     }
 
@@ -132,7 +132,7 @@
 
     main {
       flex-grow: 1;
-      overflow-y: auto; /* povolí scroll len vnútri main */
+      overflow-y: auto;
       padding: 2em 1em;
       max-width: 900px;
       margin: 0 auto;
@@ -146,22 +146,6 @@
       padding: 1.5em 2em;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       margin-bottom: 2em;
-    }
-
-    .project {
-      border: 1px solid #eee;
-      border-radius: 8px;
-      padding: 1em;
-      background: #fafafa;
-      margin-bottom: 1em;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-
-    .project:hover {
-      background: #f0f8ff;
-      border-color: var(--primary);
-      transform: translateY(-4px);
     }
 
     footer {
@@ -203,12 +187,7 @@
   </header>
 
   <main id="content">
-    <section>
-      <h2>🛠️ Projekty</h2>
-      <div class="project"><h3>📅 Kalendária</h3><p>Offline kalendár s pripomienkami, meninami a citátmi.</p></div>
-      <div class="project"><h3>📊 YouTube komentáre + sentiment</h3><p>Analýza komentárov pomocou Pythonu a NLP.</p></div>
-      <div class="project"><h3>🧰 Oprava vysávača</h3><p>Dokumentácia opravy a výmena MOSFETov.</p></div>
-    </section>
+    <p class="loading">Načítavam...</p>
   </main>
 
   <footer>
@@ -216,10 +195,40 @@
   </footer>
 
   <script>
+    // 🌐 Dynamické načítanie sekcií
+    function loadSection(section, event) {
+      if (event) {
+        document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+        event.target.classList.add("active");
+      }
+
+      const content = document.getElementById("content");
+      content.style.opacity = 0.4;
+      content.innerHTML = "<p class='loading'>Načítavam...</p>";
+
+      let file = "";
+      if (section === "projects") file = "sections/projects.html";
+      else if (section === "contact") file = "sections/contact.html";
+
+      fetch(file)
+        .then(res => res.text())
+        .then(html => {
+          content.innerHTML = html;
+          content.style.opacity = 1;
+        })
+        .catch(() => {
+          content.innerHTML = "<p class='loading'>Nepodarilo sa načítať obsah 😢</p>";
+        });
+    }
+
+    // 🧭 Minimalizácia hlavičky pri scrollovaní v main
     document.addEventListener("DOMContentLoaded", () => {
       const header = document.querySelector("header");
       const main = document.querySelector("main");
       let lastScroll = 0;
+
+      // načítanie úvodnej sekcie
+      loadSection("projects");
 
       main.addEventListener("scroll", () => {
         const currentScroll = main.scrollTop;
