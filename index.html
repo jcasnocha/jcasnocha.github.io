@@ -31,6 +31,35 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       padding: 2em 1em;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.4s ease;
+    }
+
+    header.shrink {
+      padding: 0.8em 1em;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(6px);
+    }
+
+    header.shrink .avatar {
+      width: 60px;
+      height: 60px;
+      border-width: 2px;
+    }
+
+    header.shrink h1 {
+      font-size: 1.2em;
+    }
+
+    header.shrink .title {
+      display: none;
+    }
+
+    header.shrink .socials {
+      gap: 0.6em;
+      margin-top: 0.5em;
     }
 
     .profile {
@@ -168,7 +197,7 @@
   </header>
 
   <main id="content">
-    <!-- Dynamický obsah sa zobrazí tu -->
+    <p class="loading">Načítavam...</p>
   </main>
 
   <footer>
@@ -213,22 +242,4 @@
     function showSection(name, btn) {
       document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-      const content = document.getElementById("content");
-      content.innerHTML = sections[name];
-    }
-
-    function openProject(file) {
-      const content = document.getElementById("content");
-      content.innerHTML = "<p class='loading'>Načítavam projekt...</p>";
-      fetch(file)
-        .then(res => res.text())
-        .then(html => content.innerHTML = html)
-        .catch(() => content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>");
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      showSection("projects", document.querySelector("nav button.active"));
-    });
-  </script>
-
-</body
+      const content = document.getElement
