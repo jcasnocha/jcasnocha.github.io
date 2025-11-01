@@ -180,72 +180,32 @@ main {
     }
   </style>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector("header");
-  let isShrunk = false;
+let lastScroll = 0;
+const header = document.querySelector("header");
 
-  // Funkcia sleduje scroll – berie do úvahy aj malé stránky
-  function handleScroll() {
-    const scrollPos = window.scrollY; // používame globálny scroll
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
 
-    // Hysteréza – zamedzí preblikávaniu
-    if (!isShrunk && scrollPos > 130) {
-      header.classList.add("shrink");
-      isShrunk = true;
-    } else if (isShrunk && scrollPos < 80) {
-      header.classList.remove("shrink");
-      isShrunk = false;
-    }
+  // Ak sme úplne hore → vždy zobraz plnú hlavičku
+  if (currentScroll <= 0) {
+    header.classList.remove("shrink");
+    lastScroll = 0;
+    return;
   }
 
-  window.addEventListener("scroll", handleScroll);
+  // Scrolluješ dole a presiahol si 120px → minimalizuj
+  if (currentScroll > lastScroll && currentScroll > 120) {
+    header.classList.add("shrink");
+  }
 
-  loadSection("projects");
+  // Scrolluješ hore → vráť hlavičku naspäť, ale až keď sa posunieš hore viac než o 60px
+  else if (currentScroll < lastScroll - 60) {
+    header.classList.remove("shrink");
+  }
+
+  lastScroll = currentScroll;
 });
-
-function loadSection(section, event) {
-  if (event) {
-    document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
-    event.target.classList.add("active");
-  }
-
-  const content = document.getElementById("content");
-  content.style.opacity = 0.5;
-  content.innerHTML = "<p class='loading'>Načítavam...</p>";
-
-  let file = "";
-  if (section === "projects") file = "sections/projects.html";
-  else if (section === "contact") file = "sections/contact.html";
-
-  fetch(file)
-    .then(res => res.text())
-    .then(html => {
-      content.innerHTML = html;
-      content.style.opacity = 1;
-    })
-    .catch(() => {
-      content.innerHTML = "<p class='loading'>Nepodarilo sa načítať obsah 😢</p>";
-    });
-}
-
-function openProject(file) {
-  const content = document.getElementById("content");
-  content.style.opacity = 0.5;
-  content.innerHTML = "<p class='loading'>Načítavam detail projektu...</p>";
-
-  fetch(file)
-    .then(res => res.text())
-    .then(html => {
-      content.innerHTML = html;
-      content.style.opacity = 1;
-    })
-    .catch(() => {
-      content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>";
-    });
-}
 </script>
-
-
 </head>
 
 <body>
