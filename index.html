@@ -271,7 +271,9 @@
       const scale = 1 - progress * 0.3;
       const opacity = 1 - progress * 0.2;
       const avatarSize = 120 - progress * 60;
-      const headerHeight = 220 - progress * 80;
+const minHeight = 170;
+const maxHeight = 220;
+const headerHeight = maxHeight - progress * (maxHeight - minHeight);
 
       header.style.setProperty("--scale", scale.toFixed(2));
       header.style.setProperty("--opacity", opacity.toFixed(2));
