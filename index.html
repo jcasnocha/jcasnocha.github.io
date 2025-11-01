@@ -29,29 +29,38 @@
       height: 100vh;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--card-bg);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      height: var(--header-height);
-      transition: height 0.3s ease;
-      overflow: hidden;
-      text-align: center;
-    }
+header {
+  height: var(--header-height, 220px);
+  transition: height 0.3s ease;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-    header .profile {
-      transform: scale(var(--scale));
-      opacity: var(--opacity);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      transform-origin: top center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5em;
-    }
+header .profile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: scale(var(--scale));
+  opacity: var(--opacity);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: top center;
+}
+
+nav {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  flex-wrap: wrap;
+  transition: opacity 0.3s ease;
+  opacity: var(--opacity);
+}
 
     .avatar {
       width: var(--avatar-size);
@@ -89,14 +98,6 @@
     .socials a:hover {
       color: #005f91;
       transform: scale(1.1);
-    }
-
-    nav {
-      margin-top: 1.5em;
-      display: flex;
-      justify-content: center;
-      gap: 1.5em;
-      flex-wrap: wrap;
     }
 
     nav button {
@@ -162,24 +163,28 @@
 </head>
 <body>
 
-  <header id="pageHeader">
-    <div class="profile">
-      <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar">
-      <h1>Jozef Časnocha</h1>
-      <p class="title">DIY Elektronika | Python skripty | Opravy zariadení</p>
-      <div class="socials">
-        <a href="https://github.com/jcasnocha" target="_blank"><i class="fa-brands fa-github"></i></a>
-        <a href="https://linkedin.com/in/jozef-casnocha" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://instagram.com/j.casnocha" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-      </div>
+<header id="pageHeader">
+  <div class="profile">
+    <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar">
+    <h1>Jozef Časnocha</h1>
+    <p class="title">DIY Elektronika | Python skripty | Opravy zariadení</p>
+    <div class="socials">
+      <a href="https://github.com/jcasnocha" target="_blank"><i class="fa-brands fa-github"></i></a>
+      <a href="https://linkedin.com/in/jozef-casnocha" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://instagram.com/j.casnocha" target="_blank"><i class="fa-brands fa-instagram"></i></a>
     </div>
+  </div>
 
-    <nav>
-      <button class="active" onclick="showSection('projects', this)"><i class="fa-solid fa-briefcase"></i> Projekty</button>
-      <button onclick="showSection('contact', this)"><i class="fa-solid fa-envelope"></i> Kontakt</button>
-    </nav>
-  </header>
+  <nav>
+    <button class="active" onclick="showSection('projects', this)">
+      <i class="fa-solid fa-briefcase"></i> Projekty
+    </button>
+    <button onclick="showSection('contact', this)">
+      <i class="fa-solid fa-envelope"></i> Kontakt
+    </button>
+  </nav>
+</header>
 
   <main id="content">
     <p class="loading">Načítavam...</p>
@@ -262,7 +267,7 @@
       const scale = 1 - progress * 0.3;
       const opacity = 1 - progress * 0.2;
       const avatarSize = 120 - progress * 60; // zmenšiť z 120px na 60px
-      const headerHeight = 220 - progress * 100; // zmenšiť z 220px na 120px
+      const headerHeight = 220 - progress * 80; // zmenšiť z 220px na 140px
 
       header.style.setProperty("--scale", scale.toFixed(2));
       header.style.setProperty("--opacity", opacity.toFixed(2));
