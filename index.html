@@ -25,29 +25,35 @@
       height: 100vh;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--card-bg);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      padding: 2em 1em;
-      text-align: center;
-      transition: all 0.3s ease;
-      transform: translateY(0);
-    }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: var(--header-padding, 2em) 1em;
+  text-align: center;
+  transition: padding 0.3s ease;
+}
+
+header .profile {
+  transform: scale(var(--scale, 1));
+  opacity: var(--opacity, 1);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: top center;
+}
+
+.avatar {
+  width: var(--avatar-size, 120px);
+  height: var(--avatar-size, 120px);
+  transition: width 0.3s ease, height 0.3s ease;
+}
 
     header.hide {
       transform: translateY(-100%);
     }
 
-    header .profile {
-      transform: scale(var(--scale, 1));
-      opacity: var(--opacity, 1);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      transform-origin: top center;
-    }
 
     header.shrink {
       padding: 0.8em 1em;
@@ -79,15 +85,6 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5em;
-    }
-
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid var(--primary);
-      box-shadow: 0 0 0 4px #0077b511;
-      object-fit: cover;
     }
 
     h1 {
@@ -274,39 +271,32 @@
       });
   }
 
-  function monitorScrollForHeaderShrink() {
-    const header = document.getElementById("pageHeader");
-    const content = document.getElementById("content");
+function monitorScrollForHeaderShrink() {
+  const header = document.getElementById("pageHeader");
+  const content = document.getElementById("content");
 
-    content.removeEventListener("scroll", header._scrollHandler);
+  content.removeEventListener("scroll", header._scrollHandler);
 
-    let lastScroll = 0;
+  const handler = () => {
+    const scrollY = content.scrollTop;
+    const maxScroll = 200;
 
-    const handler = () => {
-      const scrollY = content.scrollTop;
-      const maxShrink = 200;
+    const progress = Math.min(scrollY / maxScroll, 1);
 
-      // Plynulé zmenšovanie
-      const progress = Math.min(scrollY / maxShrink, 1);
-      const scale = 1 - progress * 0.4;
-      const opacity = 1 - progress * 0.5;
+    const scale = 1 - progress * 0.3; // zmenšiť profil
+    const opacity = 1 - progress * 0.2;
+    const avatarSize = 120 - progress * 60; // zmenšiť z 120px na 60px
+    const padding = 2 - progress * 1.2; // zmenšiť padding z 2em na 0.8em
 
-      header.style.setProperty("--scale", scale.toFixed(2));
-      header.style.setProperty("--opacity", opacity.toFixed(2));
+    header.style.setProperty("--scale", scale.toFixed(2));
+    header.style.setProperty("--opacity", opacity.toFixed(2));
+    header.style.setProperty("--avatar-size", `${avatarSize.toFixed(0)}px`);
+    header.style.setProperty("--header-padding", `${padding.toFixed(2)}em`);
+  };
 
-      // Skrytie hlavičky pri hlbokom scrollovaní
-      if (scrollY > lastScroll && scrollY > 300) {
-        header.classList.add("hide");
-      } else if (scrollY <= 0) {
-        header.classList.remove("hide");
-      }
-
-      lastScroll = scrollY;
-    };
-
-    content.addEventListener("scroll", handler);
-    header._scrollHandler = handler;
-  }
+  content.addEventListener("scroll", handler);
+  header._scrollHandler = handler;
+}
 
   document.addEventListener("DOMContentLoaded", () => {
     const defaultBtn = document.querySelector("nav button.active");
