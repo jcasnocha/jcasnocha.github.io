@@ -266,19 +266,17 @@
       const scrollY = content.scrollTop;
       const maxScroll = 200;
 
-      const progress = Math.min(scrollY / maxScroll, 1);
+const progress = Math.min(scrollY / 200, 1);
 
-      const scale = 1 - progress * 0.3;
-      const opacity = 1 - progress * 0.2;
-      const avatarSize = 120 - progress * 60;
-const minHeight = 170;
-const maxHeight = 220;
-const headerHeight = maxHeight - progress * (maxHeight - minHeight);
+const scale = 1 - progress * 0.2; // jemnejšie zmenšovanie
+const opacity = 1 - progress * 0.15;
+const avatarSize = 120 - progress * 50; // z 120px na 70px
+const headerHeight = 220 - progress * 60; // z 220px na 160px
 
-      header.style.setProperty("--scale", scale.toFixed(2));
-      header.style.setProperty("--opacity", opacity.toFixed(2));
-      header.style.setProperty("--avatar-size", `${avatarSize.toFixed(0)}px`);
-      header.style.setProperty("--header-height", `${headerHeight.toFixed(0)}px`);
+header.style.setProperty("--scale", scale.toFixed(2));
+header.style.setProperty("--opacity", opacity.toFixed(2));
+header.style.setProperty("--avatar-size", `${avatarSize.toFixed(0)}px`);
+header.style.setProperty("--header-height", `${headerHeight.toFixed(0)}px`);
     };
 
     content.addEventListener("scroll", handler);
