@@ -264,22 +264,21 @@
   function monitorScrollForHeaderShrink() {
     const header = document.getElementById("pageHeader");
     const content = document.getElementById("content");
-    let lastScroll = 0;
 
-    content.removeEventListener("scroll", header._scrollHandler); // odstráni starý handler, ak existuje
+    content.removeEventListener("scroll", header._scrollHandler);
 
     const handler = () => {
       const currentScroll = content.scrollTop;
-      if (currentScroll > lastScroll && currentScroll > 100) {
+
+      if (currentScroll > 100) {
         header.classList.add("shrink");
-      } else if (currentScroll < lastScroll - 60 || currentScroll <= 0) {
+      } else if (currentScroll <= 0) {
         header.classList.remove("shrink");
       }
-      lastScroll = currentScroll;
     };
 
     content.addEventListener("scroll", handler);
-    header._scrollHandler = handler; // uloží handler pre neskoršie odstránenie
+    header._scrollHandler = handler;
   }
 
   document.addEventListener("DOMContentLoaded", () => {
