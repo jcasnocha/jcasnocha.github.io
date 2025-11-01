@@ -180,67 +180,69 @@
     }
   </style>
 <script>
-  // 🧩 Minimalizácia hlavičky pri scrollovaní v rámci <main>
-  document.addEventListener("DOMContentLoaded", () => {
-    const header = document.querySelector("header");
-    const main = document.querySelector("main");
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector("header");
+  const main = document.querySelector("main");
+  let isShrunk = false;
 
-    // Sleduj scrollovanie práve v <main>, nie v okne
-    main.addEventListener("scroll", () => {
-      if (main.scrollTop > 120) {
-        header.classList.add("shrink");
-      } else {
-        header.classList.remove("shrink");
-      }
-    });
+  main.addEventListener("scroll", () => {
+    const scrollPos = main.scrollTop;
 
-    // Načítaj predvolenú sekciu
-    loadSection("projects");
+    // 🧠 Hysteréza – aby nepreblikávalo
+    if (!isShrunk && scrollPos > 130) {
+      header.classList.add("shrink");
+      isShrunk = true;
+    } else if (isShrunk && scrollPos < 100) {
+      header.classList.remove("shrink");
+      isShrunk = false;
+    }
   });
 
-  // 🧩 Prepínanie sekcií
-  function loadSection(section, event) {
-    if (event) {
-      document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
-      event.target.classList.add("active");
-    }
+  loadSection("projects");
+});
 
-    const content = document.getElementById("content");
-    content.style.opacity = 0.5;
-    content.innerHTML = "<p class='loading'>Načítavam...</p>";
-
-    let file = "";
-    if (section === "projects") file = "sections/projects.html";
-    else if (section === "contact") file = "sections/contact.html";
-
-    fetch(file)
-      .then(res => res.text())
-      .then(html => {
-        content.innerHTML = html;
-        content.style.opacity = 1;
-      })
-      .catch(() => {
-        content.innerHTML = "<p class='loading'>Nepodarilo sa načítať obsah 😢</p>";
-      });
+function loadSection(section, event) {
+  if (event) {
+    document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+    event.target.classList.add("active");
   }
 
-  // 🧩 Načítanie detailu projektu
-  function openProject(file) {
-    const content = document.getElementById("content");
-    content.style.opacity = 0.5;
-    content.innerHTML = "<p class='loading'>Načítavam detail projektu...</p>";
+  const content = document.getElementById("content");
+  content.style.opacity = 0.5;
+  content.innerHTML = "<p class='loading'>Načítavam...</p>";
 
-    fetch(file)
-      .then(res => res.text())
-      .then(html => {
-        content.innerHTML = html;
-        content.style.opacity = 1;
-      })
-      .catch(() => {
-        content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>";
-      });
-  }
+  let file = "";
+  if (section === "projects") file = "sections/projects.html";
+  else if (section === "contact") file = "sections/contact.html";
+
+  fetch(file)
+    .then(res => res.text())
+    .then(html => {
+      content.innerHTML = html;
+      content.style.opacity = 1;
+    })
+    .catch(() => {
+      content.innerHTML = "<p class='loading'>Nepodarilo sa načítať obsah 😢</p>";
+    });
+}
+
+function openProject(file) {
+  const content = document.getElementById("content");
+  content.style.opacity = 0.5;
+  content.innerHTML = "<p class='loading'>Načítavam detail projektu...</p>";
+
+  fetch(file)
+    .then(res => res.text())
+    .then(html => {
+      content.innerHTML = html;
+      content.style.opacity = 1;
+    })
+    .catch(() => {
+      content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>";
+    });
+}
 </script>
+
 </head>
 
 <body>
