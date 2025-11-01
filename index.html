@@ -44,6 +44,11 @@
       backdrop-filter: blur(6px);
     }
 
+    header.hide {
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+    }
+
     header.shrink .avatar {
       width: 60px;
       height: 60px;
@@ -167,7 +172,7 @@
 
 <body>
 
-  <header>
+  <header id="pageHeader">
     <div class="profile">
       <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar">
       <h1>Jozef Časnocha</h1>
@@ -195,11 +200,13 @@
   </footer>
 
   <script>
-    // 🌐 Dynamické načítanie sekcií
     function loadSection(section, event) {
       if (event) {
-        document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
-        event.target.classList.add("active");
+        const targetBtn = event.target.closest("button");
+        if (targetBtn) {
+          document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+          targetBtn.classList.add("active");
+        }
       }
 
       const content = document.getElementById("content");
@@ -221,50 +228,42 @@
         });
     }
 
-    // 🧭 Minimalizácia hlavičky pri scrollovaní v main
+    function openProject(file) {
+      const content = document.getElementById("content");
+      content.style.opacity = 0.4;
+      content.innerHTML = "<p class='loading'>Načítavam projekt...</p>";
+
+      fetch(file)
+        .then(res => res.text())
+        .then(html => {
+          content.innerHTML = html;
+          content.style.opacity = 1;
+        })
+        .catch(() => {
+          content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>";
+        });
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
-      const header = document.querySelector("header");
+      const header = document.getElementById("pageHeader");
       const main = document.querySelector("main");
       let lastScroll = 0;
 
-      // načítanie úvodnej sekcie
       loadSection("projects");
 
       main.addEventListener("scroll", () => {
         const currentScroll = main.scrollTop;
 
-        if (currentScroll <= 0) {
-          header.classList.remove("shrink");
-          lastScroll = 0;
-          return;
-        }
-
-        if (currentScroll > lastScroll && currentScroll > 120) {
-          header.classList.add("shrink");
-        } else if (currentScroll < lastScroll - 60) {
-          header.classList.remove("shrink");
+        if (currentScroll > lastScroll && currentScroll > 100) {
+          header.classList.add("hide");
+        } else if (currentScroll < lastScroll - 60 || currentScroll <= 0) {
+          header.classList.remove("hide");
         }
 
         lastScroll = currentScroll;
       });
     });
   </script>
-<script>
-  function openProject(file) {
-    const content = document.getElementById("content");
-    content.style.opacity = 0.4;
-    content.innerHTML = "<p class='loading'>Načítavam projekt...</p>";
 
-    fetch(file)
-      .then(res => res.text())
-      .then(html => {
-        content.innerHTML = html;
-        content.style.opacity = 1;
-      })
-      .catch(() => {
-        content.innerHTML = "<p class='loading'>Nepodarilo sa načítať projekt 😢</p>";
-      });
-  }
-</script>
 </body>
 </html>
