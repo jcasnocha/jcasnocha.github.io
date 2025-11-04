@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jozef Časnocha – Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0077b5;
+      --bg: #f3f4f6;
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+      --card-bg: #fff;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* ---------- Hero Section ---------- */
+    header {
+      background: var(--card-bg);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      padding: 3em 1.5em;
+      text-align: center;
+      position: relative;
+    }
+
+    .avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid var(--primary);
+      object-fit: cover;
+      margin-bottom: 1em;
+      transition: transform 0.3s;
+    }
+
+    .avatar:hover {
+      transform: scale(1.05);
+    }
+
+    header h1 {
+      font-size: 2em;
+      margin-bottom: 0.3em;
+    }
+
+    header p {
+      color: var(--text-light);
+      font-size: 1.1em;
+    }
+
+    .socials {
+      margin-top: 1.2em;
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+    }
+
+    .socials a {
+      color: var(--primary);
+      font-size: 1.4em;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      color: #005f91;
+      transform: translateY(-3px);
+    }
+
+    /* ---------- Follow Button ---------- */
+    .follow-btn {
+      margin-top: 1.5em;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.6em 1.5em;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1em;
+      transition: all 0.3s;
+    }
+
+    .follow-btn:hover {
+      background: #005f91;
+      transform: translateY(-2px);
+    }
+
+    .follow-btn.following {
+      background: #22c55e;
+    }
+
+    /* ---------- Placeholder ---------- */
+    main {
+      display: none;
+    }
+
+    .not-following-box {
+      max-width: 900px;
+      margin: 2em auto;
+      text-align: center;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 3em 2em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      color: var(--text-light);
+      font-size: 1.1em;
+    }
+
+    .not-following-box i {
+      font-size: 2em;
+      color: var(--primary);
+      margin-bottom: 0.5em;
+      display: block;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 2em auto;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    section h2 {
+      color: var(--primary);
+      margin-bottom: 1em;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+
+    .bio p {
+      color: var(--text-light);
+      font-size: 1.05em;
+      margin-bottom: 1em;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6em;
+    }
+
+    .skill {
+      background: #e5f1fb;
+      color: var(--primary);
+      padding: 0.4em 1em;
+      border-radius: 20px;
+      font-size: 0.9em;
+    }
+
+    /* ---------- Projects ---------- */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5em;
+    }
+
+    .project {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.5em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .project i {
+      color: var(--primary);
+      font-size: 1.8em;
+      margin-bottom: 0.6em;
+    }
+
+    .project h3 {
+      margin-bottom: 0.4em;
+      font-size: 1.2em;
+    }
+
+    .project p {
+      color: var(--text-light);
+      font-size: 0.95em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2em 1em;
+      font-size: 0.9em;
+      color: var(--text-light);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+            /* ---------- Režim prepinania dark mode ---------- */
+:root.dark {
+  --bg: #1f2937;
+  --card-bg: #2d3748;
+  --text-dark: #f3f4f6;
+  --text-light: #a0aec0;
+}
+
+:root.dark .follow-btn {
+  background: #4b5563;
+}
+
+:root.dark .follow-btn.following {
+  background: #16a34a;
+}
+
+:root.dark .project:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+  </style>
+</head>
+<body>
+<!-- test úprava -->
+
+  <header>
+    <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar">
+    <h1>Jozef Časnocha</h1>
+    <p>DIY Elektronika ⚡ | Python Skripty 🐍 | Opravy zariadení 🔧</p>
+      
+    <div class="socials">
+      <a href="https://github.com/jcasnocha" target="_blank"><i class="fa-brands fa-github"></i></a>
+      <a href="https://linkedin.com/in/jozef-casnocha" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://www.facebook.com/j.casnocha/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://instagram.com/j.casnocha" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+
+    <button id="followBtn" class="follow-btn">Follow</button>
+
+    <button id="themeToggle" class="follow-btn" style="position:absolute;top:1em;right:1em;">🌙</button>
+
+  </header>
+
+  <!-- Placeholder ak používateľ nesleduje -->
+  <div id="notFollowingBox" class="not-following-box">
+    <i class="fa-regular fa-eye-slash"></i>
+    <p><strong>Zatiaľ nesledujete tento profil.</strong></p>
+    <p>Kliknite na <span style="color:var(--primary); font-weight:600;">Follow</span> a zobrazí sa celý obsah profilu.</p>
+  </div>
+
+  <!-- Skutočný obsah profilu -->
+  <main id="main-content">
+    <section class="bio">
+      <h2><i class="fa-solid fa-user"></i> O mne</h2>
+      <p>Ahoj 👋 Som Jozef, technický nadšenec, ktorý miluje opravovanie, automatizáciu a tvorbu užitočných riešení. 
+        Rád spájam hardvér s programovaním a hľadám spôsoby, ako veci fungujú – alebo ako by mohli fungovať lepšie.</p>
+
+      <div class="skills">
+        <span class="skill">Kotlin</span>
+        <span class="skill">Java</span>
+        <span class="skill">Git & GitHub</span>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fa-solid fa-briefcase"></i> Projekty</h2>
+      <div class="projects">
+<div class="project" data-file="sections/kalendaria.html">
+  <i class="fa-solid fa-calendar-days"></i>
+  <h3>Kalendária</h3>
+  <p>Offline Android aplikácia na pripomínanie narodenín, sviatkov a zaujímavostí s widgetmi.</p>
+</div>
+
+        <div class="project">
+          <i class="fa-solid fa-magnifying-glass-chart"></i>
+          <h3>YouTube Komentáre + Sentiment</h3>
+          <p>Automatizovaný zber komentárov cez API s analýzou sentimentu a exportom do CSV.</p>
+        </div>
+
+        <div class="project">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+          <h3>Oprava vysávača</h3>
+          <p>Dokumentácia a testovanie elektroniky po výmene MOSFET tranzistorov a článkov.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>📩 Kontakt: <a href="mailto:jozef.casnocha4@gmail.com">jozef.casnocha4@gmail.com</a></p>
+    <p>© 2025 Jozef Časnocha</p>
+  </footer>
+
+  <script>
+    const followBtn = document.getElementById('followBtn');
+    const mainContent = document.getElementById('main-content');
+    const notFollowingBox = document.getElementById('notFollowingBox');
+
+    // Načítanie uloženého stavu z localStorage
+    const isFollowing = localStorage.getItem('isFollowing') === 'true';
+
+    function updateView(following) {
+      if (following) {
+        followBtn.classList.add('following');
+        followBtn.textContent = 'Following';
+        mainContent.style.display = 'block';
+        notFollowingBox.style.display = 'none';
+      } else {
+        followBtn.classList.remove('following');
+        followBtn.textContent = 'Follow';
+        mainContent.style.display = 'none';
+        notFollowingBox.style.display = 'block';
+      }
+    }
+
+    // Nastavenie po načítaní
+    updateView(isFollowing);
+
+    // Kliknutie na Follow / Unfollow
+    followBtn.addEventListener('click', () => {
+      const newState = !followBtn.classList.contains('following');
+      localStorage.setItem('isFollowing', newState);
+      updateView(newState);
+      if (newState) {
+        window.scrollTo({ top: followBtn.offsetTop + 50, behavior: 'smooth' });
+      }
+    });
+  </script>
+
+  <script>
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+
+  // skontroluj uložený režim
+  const dark = localStorage.getItem('darkMode') === 'true';
+  if (dark) {
+    root.classList.add('dark');
+    toggle.textContent = "☀️";
+  }
+
+  // prepínanie režimu
+  toggle.addEventListener('click', () => {
+    root.classList.toggle('dark');
+    const isDark = root.classList.contains('dark');
+    localStorage.setItem('darkMode', isDark);
+    toggle.textContent = isDark ? "☀️" : "🌙";
+  });
+</script>
+
+    <script>
+  const main = document.getElementById('main-content');
+  const originalContent = main.innerHTML;
+
+function initProjectLinks() {
+  const main = document.getElementById('main-content');
+  const originalContent = main.innerHTML;
+
+  document.querySelectorAll('.project[data-file]').forEach(project => {
+    project.addEventListener('click', async () => {
+      const file = project.dataset.file;
+      main.innerHTML = "<div class='loading'>Načítavam projekt...</div>";
+
+      try {
+        const res = await fetch(file);
+        const html = await res.text();
+        main.innerHTML = `
+          <section>
+            <a href="#" id="backBtn" style="color:var(--primary);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:1em;">
+              <i class="fa-solid fa-arrow-left"></i> Späť na projekty
+            </a>
+            ${html}
+          </section>
+        `;
+
+        // späť na projekty
+        document.getElementById('backBtn').addEventListener('click', e => {
+          e.preventDefault();
+          main.innerHTML = originalContent;
+          initProjectLinks(); // 🔄 reinit kliknutí
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+      } catch (err) {
+        main.innerHTML = "<div class='loading'>⚠️ Chyba pri načítaní projektu.</div>";
+      }
+    });
+  });
+}
+
+initProjectLinks();
+</script>--
+
+<script>
+  // Vyhľadaj všetky projekty s data-file
+const main2 = document.getElementById('main-content');
+const originalContent2 = main.innerHTML;
+
+document.querySelectorAll('.project[data-file]').forEach(project => {
+  project.addEventListener('click', async () => {
+    const file = project.dataset.file;
+    main.innerHTML = "<div class='loading'>Načítavam projekt...</div>";
+
+    try {
+      const res = await fetch(file);
+      const html = await res.text();
+      main.innerHTML = `
+        <section>
+          <a href="#" id="backBtn" style="color:var(--primary);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:1em;">
+            <i class="fa-solid fa-arrow-left"></i> Späť na projekty
+          </a>
+          ${html}
+        </section>
+      `;
+
+      document.getElementById('backBtn').addEventListener('click', e => {
+        e.preventDefault();
+        main.innerHTML = originalContent;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+    } catch (err) {
+      main.innerHTML = "<div class='loading'>⚠️ Chyba pri načítaní projektu.</div>";
+    }
+  });
+});
+
+</script>
+
+</body>
+</html>
