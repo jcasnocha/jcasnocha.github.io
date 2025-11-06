@@ -260,6 +260,46 @@
     transform: rotate(360deg);
   }
 }
+
+/* ---------- Navigácia ---------- */
+.navbar {
+  background: var(--card-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  padding: 1em 0;
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: var(--primary);
+}
+
+/* Dark mode podpora */
+:root.dark .navbar {
+  background: var(--card-bg);
+  box-shadow: 0 2px 8px rgba(255,255,255,0.05);
+}
+
+:root.dark .navbar a {
+  color: var(--text-light);
+}
+
   </style>
 </head>
 <body>
@@ -282,6 +322,16 @@
     <button id="themeToggle" class="follow-btn" style="position:absolute;top:1em;right:1em;">🌙</button>
 
   </header>
+
+  <!-- Navigácia -->
+<nav class="navbar">
+  <ul>
+    <li><a href="#projekty">Projekty</a></li>
+    <li><a href="#bugy">Bugy</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
 
   <!-- Placeholder ak používateľ nesleduje -->
   <div id="notFollowingBox" class="not-following-box">
