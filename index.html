@@ -6,6 +6,18 @@
   <title>Jozef Časnocha – Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+
+    .project-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 0.8em;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: white;
+  padding: 4px;
+}
+
     :root {
       --primary: #0077b5;
       --bg: #f3f4f6;
@@ -15,11 +27,7 @@
       --radius: 12px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -28,7 +36,6 @@
       line-height: 1.6;
     }
 
-    /* ---------- Hero Section ---------- */
     header {
       background: var(--card-bg);
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -47,19 +54,10 @@
       transition: transform 0.3s;
     }
 
-    .avatar:hover {
-      transform: scale(1.05);
-    }
+    .avatar:hover { transform: scale(1.05); }
 
-    header h1 {
-      font-size: 2em;
-      margin-bottom: 0.3em;
-    }
-
-    header p {
-      color: var(--text-light);
-      font-size: 1.1em;
-    }
+    header h1 { font-size: 2em; margin-bottom: 0.3em; }
+    header p { color: var(--text-light); font-size: 1.1em; }
 
     .socials {
       margin-top: 1.2em;
@@ -79,7 +77,6 @@
       transform: translateY(-3px);
     }
 
-    /* ---------- Follow Button ---------- */
     .follow-btn {
       margin-top: 1.5em;
       background: var(--primary);
@@ -93,39 +90,36 @@
       transition: all 0.3s;
     }
 
-    .follow-btn:hover {
-      background: #005f91;
-      transform: translateY(-2px);
-    }
+    .follow-btn:hover { background: #005f91; transform: translateY(-2px); }
+    .follow-btn.following { background: #22c55e; }
 
-    .follow-btn.following {
-      background: #22c55e;
-    }
-
-    /* ---------- Placeholder ---------- */
-    main {
-      display: none;
-    }
-
-    .not-following-box {
-      max-width: 900px;
-      margin: 2em auto;
-      text-align: center;
+    .navbar {
       background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 3em 2em;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      color: var(--text-light);
-      font-size: 1.1em;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .not-following-box i {
-      font-size: 2em;
-      color: var(--primary);
-      margin-bottom: 0.5em;
-      display: block;
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      padding: 1em 0;
+      margin: 0;
     }
 
+    .navbar a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover { color: var(--primary); }
+
+    main { display: none; }
     section {
       max-width: 900px;
       margin: 2em auto;
@@ -144,11 +138,7 @@
       gap: 0.5em;
     }
 
-    .bio p {
-      color: var(--text-light);
-      font-size: 1.05em;
-      margin-bottom: 1em;
-    }
+    .bio p { color: var(--text-light); font-size: 1.05em; margin-bottom: 1em; }
 
     .skills {
       display: flex;
@@ -164,7 +154,6 @@
       font-size: 0.9em;
     }
 
-    /* ---------- Projects ---------- */
     .projects {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -185,21 +174,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .project i {
-      color: var(--primary);
-      font-size: 1.8em;
-      margin-bottom: 0.6em;
-    }
-
-    .project h3 {
-      margin-bottom: 0.4em;
-      font-size: 1.2em;
-    }
-
-    .project p {
-      color: var(--text-light);
-      font-size: 0.95em;
-    }
+    .project i { color: var(--primary); font-size: 1.8em; margin-bottom: 0.6em; }
 
     footer {
       text-align: center;
@@ -208,103 +183,81 @@
       color: var(--text-light);
     }
 
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-      transition: 0.3s;
+    footer a { color: var(--primary); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Dark Mode */
+    :root.dark {
+      --bg: #1f2937;
+      --card-bg: #2d3748;
+      --text-dark: #f3f4f6;
+      --text-light: #a0aec0;
     }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
+    :root.dark .follow-btn { background: #4b5563; }
+    :root.dark .follow-btn.following { background: #16a34a; }
 
-            /* ---------- Režim prepinania dark mode ---------- */
-:root.dark {
-  --bg: #1f2937;
-  --card-bg: #2d3748;
-  --text-dark: #f3f4f6;
-  --text-light: #a0aec0;
-}
-
-:root.dark .follow-btn {
-  background: #4b5563;
-}
-
-:root.dark .follow-btn.following {
-  background: #16a34a;
-}
-
-:root.dark .project:hover {
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-}
-
-.loading-spinner {
+    .app-header {
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 200px;
-}
-
-.loading-spinner::after {
-  content: "";
-  width: 40px;
-  height: 40px;
-  border: 5px solid var(--primary);
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ---------- Navigácia ---------- */
-.navbar {
+  gap: 1em;
   background: var(--card-bg);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  padding: 1.5em;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 2em;
-  padding: 1em 0;
-  margin: 0;
+.app-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 20%;
+  object-fit: cover;
 }
 
-.navbar a {
+.play-btn {
+  display: inline-block;
+  margin-top: 0.5em;
+  background: var(--primary);
+  color: white;
+  padding: 0.4em 1em;
+  border-radius: 25px;
   text-decoration: none;
-  color: var(--text-dark);
-  font-weight: 600;
-  transition: 0.3s;
+  font-size: 0.95em;
 }
 
-.navbar a:hover {
-  color: var(--primary);
-}
-
-/* Dark mode podpora */
-:root.dark .navbar {
+.details { margin-top: 2em; }
+.card {
   background: var(--card-bg);
-  box-shadow: 0 2px 8px rgba(255,255,255,0.05);
+  padding: 1.2em 1.5em;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 1.2em;
 }
-
-:root.dark .navbar a {
-  color: var(--text-light);
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 0.6em;
+}
+.card-header img { width: 24px; height: 24px; object-fit: contain; }
+.inline-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 6px;
+  object-fit: contain;
+}
+.checkbox {
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
   </style>
 </head>
 <body>
-<!-- test úprava -->
-
   <header>
     <img src="https://live-s3-bucket-sjwburhj9xhf.cdn.live.tandem.net/f3/3c/97fd9bddc6300759dbab0ec282f209ee.jpg" alt="Profilová fotka" class="avatar">
     <h1>Jozef Časnocha</h1>
@@ -318,35 +271,20 @@
     </div>
 
     <button id="followBtn" class="follow-btn">Follow</button>
-
     <button id="themeToggle" class="follow-btn" style="position:absolute;top:1em;right:1em;">🌙</button>
-
   </header>
 
-  <!-- Navigácia -->
-<nav class="navbar">
-  <ul>
-    <li><a href="#projekty">Projekty</a></li>
-    <li><a href="#bugy">Bugy</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
-  </ul>
-</nav>
+  <nav class="navbar">
+    <ul>
+      <li><a href="#" id="navProjekty">Projekty</a></li>
+      <li><a href="#" id="navBugy">Bugy</a></li>
+    </ul>
+  </nav>
 
-
-  <!-- Placeholder ak používateľ nesleduje -->
-  <div id="notFollowingBox" class="not-following-box">
-    <i class="fa-regular fa-eye-slash"></i>
-    <p><strong>Zatiaľ nesledujete tento profil.</strong></p>
-    <p>Kliknite na <span style="color:var(--primary); font-weight:600;">Follow</span> a zobrazí sa celý obsah profilu.</p>
-  </div>
-
-  <!-- Skutočný obsah profilu -->
   <main id="main-content">
     <section class="bio">
       <h2><i class="fa-solid fa-user"></i> O mne</h2>
-      <p>Ahoj 👋 Som Jozef, technický nadšenec, ktorý miluje opravovanie, automatizáciu a tvorbu užitočných riešení. 
-        Rád spájam hardvér s programovaním a hľadám spôsoby, ako veci fungujú – alebo ako by mohli fungovať lepšie.</p>
-
+      <p>Ahoj 👋 Som Jozef, technický nadšenec, ktorý miluje opravovanie, automatizáciu a tvorbu užitočných riešení.</p>
       <div class="skills">
         <span class="skill">Kotlin</span>
         <span class="skill">Java</span>
@@ -354,28 +292,7 @@
       </div>
     </section>
 
-    <section>
-      <h2><i class="fa-solid fa-briefcase"></i> Projekty</h2>
-      <div class="projects">
-<div class="project" data-file="sections/kalendaria.html">
-  <i class="fa-solid fa-calendar-days"></i>
-  <h3>Kalendária</h3>
-  <p>Offline Android aplikácia na pripomínanie narodenín, sviatkov a zaujímavostí s widgetmi.</p>
-</div>
-
-        <div class="project">
-          <i class="fa-solid fa-magnifying-glass-chart"></i>
-          <h3>YouTube Komentáre + Sentiment</h3>
-          <p>Automatizovaný zber komentárov cez API s analýzou sentimentu a exportom do CSV.</p>
-        </div>
-
-        <div class="project">
-          <i class="fa-solid fa-screwdriver-wrench"></i>
-          <h3>Oprava vysávača</h3>
-          <p>Dokumentácia a testovanie elektroniky po výmene MOSFET tranzistorov a článkov.</p>
-        </div>
-      </div>
-    </section>
+    <div id="dynamic-section"></div>
   </main>
 
   <footer>
@@ -383,140 +300,134 @@
     <p>© 2025 Jozef Časnocha</p>
   </footer>
 
-  <script>
-    const followBtn = document.getElementById('followBtn');
-    const mainContent = document.getElementById('main-content');
-    const notFollowingBox = document.getElementById('notFollowingBox');
+<script>
+  const followBtn = document.getElementById('followBtn');
+  const mainContent = document.getElementById('main-content');
+  const isFollowing = localStorage.getItem('isFollowing') === 'true';
 
-    // Načítanie uloženého stavu z localStorage
-    const isFollowing = localStorage.getItem('isFollowing') === 'true';
-
-    function updateView(following) {
-      if (following) {
-        followBtn.classList.add('following');
-        followBtn.textContent = 'Following';
-        mainContent.style.display = 'block';
-        notFollowingBox.style.display = 'none';
-      } else {
-        followBtn.classList.remove('following');
-        followBtn.textContent = 'Follow';
-        mainContent.style.display = 'none';
-        notFollowingBox.style.display = 'block';
-      }
+  function updateView(following) {
+    if (following) {
+      followBtn.classList.add('following');
+      followBtn.textContent = 'Following';
+      mainContent.style.display = 'block';
+    } else {
+      followBtn.classList.remove('following');
+      followBtn.textContent = 'Follow';
+      mainContent.style.display = 'none';
     }
-
-    // Nastavenie po načítaní
-    updateView(isFollowing);
-
-    // Kliknutie na Follow / Unfollow
-    followBtn.addEventListener('click', () => {
-      const newState = !followBtn.classList.contains('following');
-      localStorage.setItem('isFollowing', newState);
-      updateView(newState);
-      if (newState) {
-        window.scrollTo({ top: followBtn.offsetTop + 50, behavior: 'smooth' });
-      }
-    });
-  </script>
-
-  <script>
-  const toggle = document.getElementById('themeToggle');
-  const root = document.documentElement;
-
-  // skontroluj uložený režim
-  const dark = localStorage.getItem('darkMode') === 'true';
-  if (dark) {
-    root.classList.add('dark');
-    toggle.textContent = "☀️";
   }
 
-  // prepínanie režimu
+  updateView(isFollowing);
+
+  followBtn.addEventListener('click', () => {
+    const newState = !followBtn.classList.contains('following');
+    localStorage.setItem('isFollowing', newState);
+    updateView(newState);
+  });
+
+  // Prepínanie dark režimu
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const dark = localStorage.getItem('darkMode') === 'true';
+  if (dark) { root.classList.add('dark'); toggle.textContent = "☀️"; }
+
   toggle.addEventListener('click', () => {
     root.classList.toggle('dark');
     const isDark = root.classList.contains('dark');
     localStorage.setItem('darkMode', isDark);
     toggle.textContent = isDark ? "☀️" : "🌙";
   });
-</script>
 
-    <script>
-  const main = document.getElementById('main-content');
-  const originalContent = main.innerHTML;
+  // ===== DYNAMICKÉ SEKCIE =====
+  const dynamicSection = document.getElementById('dynamic-section');
+  const navProjekty = document.getElementById('navProjekty');
+  const navBugy = document.getElementById('navBugy');
 
-function initProjectLinks() {
-  const main = document.getElementById('main-content');
-  const originalContent = main.innerHTML;
+  const projektyHTML = `
+    <section>
+      <h2><i class="fa-solid fa-briefcase"></i> Projekty</h2>
+      <div class="projects">
+        <div class="project" data-file="kalendaria.html">
+          <i class="fa-solid fa-calendar-days"></i>
+          <h3>Kalendária</h3>
+          <p>Offline Android aplikácia na pripomínanie narodenín, sviatkov a zaujímavostí.</p>
+        </div>
+        <div class="project">
+          <i class="fa-solid fa-magnifying-glass-chart"></i>
+          <h3>YouTube Komentáre + Sentiment</h3>
+          <p>Automatizovaný zber komentárov cez API s analýzou sentimentu a exportom do CSV.</p>
+        </div>
+      </div>
+    </section>
+  `;
 
-  document.querySelectorAll('.project[data-file]').forEach(project => {
-    project.addEventListener('click', async () => {
-      const file = project.dataset.file;
-      main.innerHTML = "<div class='loading-spinner'></div>";
 
-      try {
-        const res = await fetch(file);
-        const html = await res.text();
-        main.innerHTML = `
-          <section>
-            <a href="#" id="backBtn" style="color:var(--primary);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:1em;">
-              <i class="fa-solid fa-arrow-left"></i> Späť na projekty
-            </a>
-            ${html}
-          </section>
-        `;
 
-        // späť na projekty
-        document.getElementById('backBtn').addEventListener('click', e => {
-          e.preventDefault();
-          main.innerHTML = originalContent;
-          initProjectLinks(); // 🔄 reinit kliknutí
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+  function renderProjects() {
+    dynamicSection.innerHTML = projektyHTML;
+    initProjectLinks();
+  }
 
-      } catch (err) {
-        main.innerHTML = "<div class='loading'>⚠️ Chyba pri načítaní projektu.</div>";
-      }
-    });
-  });
+async function renderBugy() {
+  try {
+    const res = await fetch("sections/bugy.html");
+    const html = await res.text();
+    dynamicSection.innerHTML = html;
+  } catch (err) {
+    console.error("Chyba pri načítaní bugy.html:", err);
+    dynamicSection.innerHTML = "<p>❌ Nepodarilo sa načítať sekciu bugy.</p>";
+  }
 }
 
-initProjectLinks();
-</script>--
 
-<script>
-  // Vyhľadaj všetky projekty s data-file
-const main2 = document.getElementById('main-content');
-const originalContent2 = main.innerHTML;
-
-document.querySelectorAll('.project[data-file]').forEach(project => {
-  project.addEventListener('click', async () => {
-    const file = project.dataset.file;
-    main.innerHTML = "<div class='loading'>Načítavam projekt...</div>";
-
-    try {
-      const res = await fetch(file);
-      const html = await res.text();
-      main.innerHTML = `
-        <section>
-          <a href="#" id="backBtn" style="color:var(--primary);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:1em;">
-            <i class="fa-solid fa-arrow-left"></i> Späť na projekty
-          </a>
-          ${html}
-        </section>
-      `;
-
-      document.getElementById('backBtn').addEventListener('click', e => {
-        e.preventDefault();
-        main.innerHTML = originalContent;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-    } catch (err) {
-      main.innerHTML = "<div class='loading'>⚠️ Chyba pri načítaní projektu.</div>";
-    }
+  // kliky v navigácii
+  navProjekty.addEventListener('click', e => {
+    e.preventDefault();
+    renderProjects();
   });
-});
 
+  navBugy.addEventListener('click', e => {
+    e.preventDefault();
+    renderBugy();
+  });
+
+  // ===== Načítanie externého HTML po kliknutí na projekt =====
+  function initProjectLinks() {
+    document.querySelectorAll('.project[data-file]').forEach(el => {
+      el.addEventListener('click', async () => {
+        const file = el.getAttribute('data-file');
+        try {
+          const res = await fetch(file);
+          const html = await res.text();
+
+          const existingDetails = document.querySelector('#project-detail');
+          if (existingDetails) existingDetails.remove();
+
+          const detailSection = document.createElement('section');
+          detailSection.id = 'project-detail';
+          detailSection.innerHTML = html;
+          dynamicSection.appendChild(detailSection);
+
+          // tlačidlo späť
+          const backBtn = document.createElement('button');
+          backBtn.textContent = '← Späť na projekty';
+          backBtn.className = 'follow-btn';
+          backBtn.style.marginTop = '1.5em';
+          backBtn.addEventListener('click', renderProjects);
+          detailSection.appendChild(backBtn);
+
+          window.scrollTo({ top: detailSection.offsetTop - 50, behavior: 'smooth' });
+        } catch (err) {
+          console.error('Chyba pri načítaní súboru:', err);
+        }
+      });
+    });
+  }
+
+  // predvolene zobraz projekty
+  renderProjects();
 </script>
+
 
 </body>
 </html>
