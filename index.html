@@ -255,6 +255,16 @@
   margin-right: 8px;
 }
 
+.bug-video {
+  width: 60%;
+  display: block;
+  margin: 0.8em auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+
   </style>
 </head>
 <body>
@@ -347,7 +357,7 @@
     <section>
       <h2><i class="fa-solid fa-briefcase"></i> Projekty</h2>
       <div class="projects">
-        <div class="project" data-file="kalendaria.html">
+        <div class="project" data-file="sections/kalendaria.html">
           <i class="fa-solid fa-calendar-days"></i>
           <h3>Kalendária</h3>
           <p>Offline Android aplikácia na pripomínanie narodenín, sviatkov a zaujímavostí.</p>
@@ -373,12 +383,12 @@ async function renderBugy() {
     const res = await fetch("sections/bugy.html");
     const html = await res.text();
     dynamicSection.innerHTML = html;
+    initProjectLinks(); // ← pridaj tento riadok
   } catch (err) {
     console.error("Chyba pri načítaní bugy.html:", err);
     dynamicSection.innerHTML = "<p>❌ Nepodarilo sa načítať sekciu bugy.</p>";
   }
 }
-
 
   // kliky v navigácii
   navProjekty.addEventListener('click', e => {
