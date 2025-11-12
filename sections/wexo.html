@@ -8,23 +8,48 @@
   </div>
 
   <div class="details">
+    <!-- 🐞 Popis chyby -->
     <div class="card">
       <div class="card-header">
         <img src="images/warning.png" alt="warning">
         <h3>Popis chyby</h3>
       </div>
-      <p>Pri zadavaní hesla do aplikácie by sa znaky nemali zobrazovať v TOOLBARE na klávesnici, slová a skupiny znakov sa ukladajú do zariadenia. </p>
+      <p><strong>Typ chyby:</strong> Závažná chyba zabezpečenia (privacy/security issue)<br>
+         <strong>Platforma:</strong> Android/iOS (smartfón)<br>
+         <strong>Oblasť:</strong> UI/UX, bezpečnosť vstupu hesla
+      </p>
+      <p><strong>📌 Symptómy:</strong></p>
+      <ul>
+        <li>Pri zadávaní hesla do vstupného poľa (napr. login, registrácia) sa heslo zobrazuje v paneli návrhov/slovníka nad klávesnicou.</li>
+        <li>Po zadaní sa heslo uloží ako navrhované/slovníkové slovo, ktoré sa môže objaviť pri ďalšom písaní.</li>
+        <li>V niektorých prípadoch sa heslo dokonca zobrazí ako návrh automatického dopĺňania.</li>
+      </ul>
+      <p><strong>⚠️ Riziká:</strong></p>
+      <ul>
+        <li>Ohrozenie súkromia: Heslo je viditeľné a môže byť neúmyselne zdieľané alebo uložené.</li>
+        <li>Zneužitie: Heslo sa môže objaviť v iných aplikáciách ako návrh textu.</li>
+        <li>Porušenie bezpečnostných štandardov: Vstupné pole pre heslo by malo byť výslovne označené ako „password“ typ, aby sa zabránilo návrhom a ukladaniu.</li>
+      </ul>
     </div>
 
+    <!-- ✅ Odporúčané riešenie -->
     <div class="card">
       <div class="card-header">
         <img src="images/fix.png" alt="fix">
         <h3>Navrhované riešenie</h3>
       </div>
-      <p>Zakázať zobrazovanie hesla pri neuzamknutom zariadení alebo pridať sekundárne overenie (napr. biometria).</p>
+      <p><strong>Pre vývojárov:</strong></p>
+      <ul>
+        <li>Skontrolovať, či vstupné pole má správne nastavený atribút:
+          <code>&lt;input type="password" autocomplete="off" autocorrect="off" /&gt;</code>
+        </li>
+        <li>Na Android/iOS platforme použiť natívne API na označenie vstupu ako „secure text entry“.</li>
+        <li>Zakázať automatické dopĺňanie, návrhy a slovník pre dané pole.</li>
+        <li>Voliteľne pridať sekundárne overenie (napr. biometria) pri neuzamknutom zariadení.</li>
+      </ul>
     </div>
 
-    <!-- 🎥 Nový blok s videom -->
+    <!-- 🎥 Ukážka problému -->
     <div class="card">
       <div class="card-header">
         <img src="images/video.png" alt="video">
@@ -36,4 +61,3 @@
       </video>
     </div>
   </div>
-</div>
