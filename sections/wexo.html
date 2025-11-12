@@ -15,10 +15,10 @@
         <h3>Popis chyby</h3>
       </div>
       <p><strong>Typ chyby:</strong> Závažná chyba zabezpečenia (privacy/security issue)<br>
-         <strong>Platforma:</strong> Android/iOS (smartfón)<br>
+         <strong>Platforma:</strong> Android (smartfón)<br>
          <strong>Oblasť:</strong> UI/UX, bezpečnosť vstupu hesla
       </p>
-      <p><strong>📌 Symptómy:</strong></p>
+      <p><strong>📌 Popis chyby:</strong></p>
       <ul>
         <li>Pri zadávaní hesla do vstupného poľa (napr. login, registrácia) sa heslo zobrazuje v paneli návrhov/slovníka nad klávesnicou.</li>
         <li>Po zadaní sa heslo uloží ako navrhované/slovníkové slovo, ktoré sa môže objaviť pri ďalšom písaní.</li>
@@ -40,12 +40,9 @@
       </div>
       <p><strong>Pre vývojárov:</strong></p>
       <ul>
-        <li>Skontrolovať, či vstupné pole má správne nastavený atribút:
-          <code>&lt;input type="password" autocomplete="off" autocorrect="off" /&gt;</code>
-        </li>
+        <li>Skontrolovať, či vstupné pole má správne nastavený atribút</li>
         <li>Na Android/iOS platforme použiť natívne API na označenie vstupu ako „secure text entry“.</li>
         <li>Zakázať automatické dopĺňanie, návrhy a slovník pre dané pole.</li>
-        <li>Voliteľne pridať sekundárne overenie (napr. biometria) pri neuzamknutom zariadení.</li>
       </ul>
     </div>
 
