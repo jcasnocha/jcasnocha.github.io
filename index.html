@@ -391,15 +391,22 @@ async function renderBugy() {
 }
 
   // kliky v navigácii
-  navProjekty.addEventListener('click', e => {
-    e.preventDefault();
-    renderProjects();
-  });
+navProjekty.addEventListener('click', e => {
+  e.preventDefault();
+  renderProjects();
+  // scroll na sekciu
+  setTimeout(() => {
+    dynamicSection.scrollIntoView({ behavior: 'smooth' });
+  }, 100);
+});
 
-  navBugy.addEventListener('click', e => {
-    e.preventDefault();
-    renderBugy();
+navBugy.addEventListener('click', e => {
+  e.preventDefault();
+  renderBugy().then(() => {
+    dynamicSection.scrollIntoView({ behavior: 'smooth' });
   });
+});
+
 
   // ===== Načítanie externého HTML po kliknutí na projekt =====
   function initProjectLinks() {
